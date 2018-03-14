@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:clickable="false"
-        android:focusable="false" />
+        android:focusable="false"
+        android:theme="@style/AppTheme.OrangeAccent" />
 
 </LinearLayout>

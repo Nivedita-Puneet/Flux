@@ -13,8 +13,6 @@ import android.view.ViewGroup
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.base.BaseFragment
-import com.vicky7230.flux.ui.home.HomeActivity
-import com.vicky7230.flux.ui.home.ItemOffsetDecoration
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_tv.*
 import javax.inject.Inject
@@ -93,11 +91,13 @@ class TvFragment : BaseFragment(), TvMvpView {
         presenter.getTvs()
     }
 
-    override fun updateTvList(torrents: MutableList<Result>) {
+    override fun updateTvList(results: MutableList<Result>) {
         if (tvAdapter.itemCount > 0)
             tvAdapter.removeItem()
-        tvAdapter.addItems(torrents)
-        isLoading = false
+        if (results.size > 0) {
+            tvAdapter.addItems(results)
+            isLoading = false
+        }
     }
 
     override fun onDestroyView() {

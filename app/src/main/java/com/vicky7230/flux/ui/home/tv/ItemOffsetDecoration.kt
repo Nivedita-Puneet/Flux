@@ -1,4 +1,4 @@
-package com.vicky7230.flux.ui.home
+package com.vicky7230.flux.ui.home.tv
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
@@ -25,7 +25,7 @@ class ItemOffsetDecoration(private val offset: Int) : RecyclerView.ItemDecoratio
             outRect.left = offset
         }
 
-        outRect.bottom = offset
+        outRect.bottom = offset * 3
         // Add top margin only for the first item to avoid double space between items
         if (parent.getChildAdapterPosition(view) == 0)
             outRect.top = offset

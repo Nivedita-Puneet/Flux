@@ -8,5 +8,5 @@ import com.vicky7230.flux.ui.base.MvpView
  */
 interface TvMvpView : MvpView {
 
-    fun updateTvList(torrents: MutableList<Result>)
+    fun updateTvList(results: MutableList<Result>)
 }

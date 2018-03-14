@@ -12,7 +12,9 @@ interface ApiHelper {
 
     fun getConfigurations(apiKey: String): Observable<Configuration>
 
-    fun getGenres(apiKey: String): Observable<Genres>
+    fun getGenresTv(apiKey: String): Observable<Genres>
+
+    fun getGenresMovies(apiKey: String): Observable<Genres>
 
     fun getTvByGenres(apiKey: String, withGenres: String, page: String): Observable<Results>
 

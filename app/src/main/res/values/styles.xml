@@ -10,7 +10,7 @@
         <item name="colorAccent">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.FooterProgressBarTheme">
+    <style name="AppTheme.OrangeAccent">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 

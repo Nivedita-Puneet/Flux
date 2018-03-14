@@ -15,8 +15,12 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
         return apiService.getConfigurations(apiKey)
     }
 
-    override fun getGenres(apiKey: String): Observable<Genres> {
-        return apiService.getGenres(apiKey)
+    override fun getGenresTv(apiKey: String): Observable<Genres> {
+        return apiService.getGenresTv(apiKey)
+    }
+
+    override fun getGenresMovies(apiKey: String): Observable<Genres> {
+        return apiService.getGenresMovies(apiKey)
     }
 
     override fun getTvByGenres(

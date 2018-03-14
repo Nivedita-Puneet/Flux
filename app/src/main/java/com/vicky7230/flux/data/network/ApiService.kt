@@ -14,7 +14,12 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("genre/tv/list")
-    fun getGenres(
+    fun getGenresTv(
+        @Query("api_key") apiKey: String
+    ): Observable<Genres>
+
+    @GET("genre/movie/list")
+    fun getGenresMovies(
         @Query("api_key") apiKey: String
     ): Observable<Genres>
 

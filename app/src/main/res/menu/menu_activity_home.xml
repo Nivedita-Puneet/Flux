@@ -7,4 +7,9 @@
         android:title="Search"
         android:icon="@drawable/ic_search_black_24dp"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/filters"
+        android:icon="@drawable/ic_filters_black_24dp"
+        android:title="Filters"
+        app:showAsAction="always" />
 </menu>

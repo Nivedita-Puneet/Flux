@@ -3,7 +3,6 @@ package com.vicky7230.flux.ui.home.tv
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import com.vicky7230.flux.di.ApplicationContext
-import com.vicky7230.flux.ui.home.ItemOffsetDecoration
 import dagger.Module
 import dagger.Provides
 
@@ -24,7 +23,7 @@ class TvModule {
 
     @Provides
     fun provideItemOffsetDecoration(): ItemOffsetDecoration {
-        return ItemOffsetDecoration(7)
+        return ItemOffsetDecoration(20)
     }
 
     @Provides

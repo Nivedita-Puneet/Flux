@@ -83,7 +83,7 @@ class SplashPresenter<V : SplashMvpView> @Inject constructor(
                         return@subscribe
                     //mvpView?.hideLoading()
                     if (configuration != null) {
-                        mvpView?.showMessage("Success")
+                        //mvpView?.showMessage("Success")
                         decideNextActivity()
                     }
                 }, { throwable ->

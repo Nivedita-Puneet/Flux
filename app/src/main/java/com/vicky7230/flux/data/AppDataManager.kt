@@ -48,8 +48,12 @@ constructor(
         return appDbHelper.insertConfigurations(configurations)
     }
 
-    override fun getGenres(apiKey: String): Observable<Genres> {
-        return appApiHelper.getGenres(apiKey)
+    override fun getGenresTv(apiKey: String): Observable<Genres> {
+        return appApiHelper.getGenresTv(apiKey)
+    }
+
+    override fun getGenresMovies(apiKey: String): Observable<Genres> {
+        return appApiHelper.getGenresMovies(apiKey)
     }
 
     override fun getTvByGenres(

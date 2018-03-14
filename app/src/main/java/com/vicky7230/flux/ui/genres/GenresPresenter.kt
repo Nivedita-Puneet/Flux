@@ -2,9 +2,13 @@ package com.vicky7230.flux.ui.genres
 
 import com.vicky7230.flux.data.Config
 import com.vicky7230.flux.data.DataManager
+import com.vicky7230.flux.data.network.model.genres.Genre
+import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.ui.base.BasePresenter
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,15 +24,24 @@ class GenresPresenter<V : GenresMvpView> @Inject constructor(
     override fun getGenres() {
         mvpView?.showLoading()
         compositeDisposable.add(
-            dataManager.getGenres(Config.API_KEY)
+            Observable.zip(
+                dataManager.getGenresTv(Config.API_KEY),
+                dataManager.getGenresMovies(Config.API_KEY),
+                BiFunction { t1: Genres, t2: Genres ->
+                    val data = mutableListOf<Genre>()
+                    data.addAll(t1.genres ?: arrayListOf())
+                    data.addAll(t2.genres ?: arrayListOf())
+                    data.sortBy { it.name }
+                    return@BiFunction data.distinctBy { it.name } as MutableList<Genre>
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ genres ->
+                .subscribe({ genres: MutableList<Genre>? ->
                     if (!isViewAttached())
                         return@subscribe
                     mvpView?.hideLoading()
                     if (genres != null)
-                        mvpView?.showGenres(genres.genres)
+                        mvpView?.showGenres(genres)
                 }, { throwable ->
                     if (!isViewAttached())
                         return@subscribe

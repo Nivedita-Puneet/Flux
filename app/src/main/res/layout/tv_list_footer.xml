@@ -18,7 +18,7 @@
             android:layout_height="35dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:theme="@style/AppTheme.FooterProgressBarTheme" />
+            android:theme="@style/AppTheme.OrangeAccent" />
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"

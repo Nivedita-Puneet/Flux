@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.home.ResultDiffUtilCallback
+import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
 import kotlinx.android.synthetic.main.tv_list_item.view.*
 
@@ -105,8 +106,15 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
                 .load("https://image.tmdb.org/t/p/w780/" + result?.backdropPath)
                 .transition(withCrossFade())
                 .centerCrop()
-                .into(itemView.torrent_image)
-            itemView.torrent_title.text = result?.originalName
+                .into(itemView.tv_image)
+
+            itemView.tv_title.text = result?.originalName
+
+            var genres = ""
+            result?.genreIds?.forEach { t -> genres = genres.plus(AppConstants.genres[t] + ", ") }
+            itemView.tv_genres.text = genres.dropLast(2)
+
+            itemView.rating.text = result?.voteAverage.toString()
         }
     }
 

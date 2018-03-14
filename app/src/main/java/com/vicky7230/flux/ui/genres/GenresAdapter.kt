@@ -21,7 +21,6 @@ class GenresAdapter(private val genres: MutableList<Genre>?) :
         }
     }
 
-
     override fun getItemCount(): Int {
         return genres?.size ?: 0
     }
@@ -35,14 +34,14 @@ class GenresAdapter(private val genres: MutableList<Genre>?) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val genreViewHolder = GenreViewHolder(
-            LayoutInflater.from(parent?.context).inflate(
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.genre_list_item,
                 parent,
                 false
             )
         )
 
-        genreViewHolder.itemView.setOnClickListener(View.OnClickListener {
+        genreViewHolder.itemView.setOnClickListener({
             val genre = getItem(genreViewHolder.adapterPosition)
             if (genre != null) {
                 genreViewHolder.itemView.check_box.isChecked = !genre.selected
@@ -65,7 +64,7 @@ class GenresAdapter(private val genres: MutableList<Genre>?) :
             itemView.check_box.isChecked = genre?.selected!!
 
             when (genre.id) {
-                10759 -> itemView.genre_icon.setImageResource(R.drawable.ic_action_gray_24dp)
+                10759 -> itemView.genre_icon.setImageResource(R.drawable.ic_action_adventure_gray_24dp)
                 16 -> itemView.genre_icon.setImageResource(R.drawable.ic_animation_gray_24dp)
                 35 -> itemView.genre_icon.setImageResource(R.drawable.ic_comedy_gray_24dp)
                 80 -> itemView.genre_icon.setImageResource(R.drawable.ic_crime_gray_24dp)
@@ -79,8 +78,19 @@ class GenresAdapter(private val genres: MutableList<Genre>?) :
                 10765 -> itemView.genre_icon.setImageResource(R.drawable.ic_sci_fi_gray_24dp)
                 10766 -> itemView.genre_icon.setImageResource(R.drawable.ic_soap_gray_24dp)
                 10767 -> itemView.genre_icon.setImageResource(R.drawable.ic_talk_gray_24dp)
-                10768 -> itemView.genre_icon.setImageResource(R.drawable.ic_war_gray_24dp)
+                10768 -> itemView.genre_icon.setImageResource(R.drawable.ic_war_politics_gray_24dp)
                 37 -> itemView.genre_icon.setImageResource(R.drawable.ic_western_gray_24dp)
+                28 -> itemView.genre_icon.setImageResource(R.drawable.ic_action_gray_24dp)
+                12 -> itemView.genre_icon.setImageResource(R.drawable.ic_adventure_gray_24dp)
+                14 -> itemView.genre_icon.setImageResource(R.drawable.ic_fantasy_gray_24dp)
+                36 -> itemView.genre_icon.setImageResource(R.drawable.ic_history_gray_24dp)
+                27 -> itemView.genre_icon.setImageResource(R.drawable.ic_horror_gray_24dp)
+                10402 -> itemView.genre_icon.setImageResource(R.drawable.ic_music_gray_24dp)
+                10749 -> itemView.genre_icon.setImageResource(R.drawable.ic_romance_gray_24dp)
+                878 -> itemView.genre_icon.setImageResource(R.drawable.ic_science_fiction_gray_24dp)
+                10770 -> itemView.genre_icon.setImageResource(R.drawable.ic_tv_movie_gray_24dp)
+                53 -> itemView.genre_icon.setImageResource(R.drawable.ic_thriller_gray_24dp)
+                10752 -> itemView.genre_icon.setImageResource(R.drawable.ic_war_gray_24dp)
             }
         }
     }
