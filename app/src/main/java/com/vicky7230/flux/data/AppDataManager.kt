@@ -3,9 +3,11 @@ package com.vicky7230.flux.data
 import com.vicky7230.flux.data.db.AppDbHelper
 import com.vicky7230.flux.data.db.room.model.ConfigurationDbModel
 import com.vicky7230.flux.data.network.AppApiHelper
+import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
+import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -26,6 +28,14 @@ constructor(
 
     override fun getIsUserLoggedIn(): Boolean {
         return appPreferencesHelper.getIsUserLoggedIn()
+    }
+
+    override fun setSessionIdIntoPreference(sessionId: String?) {
+        appPreferencesHelper.setSessionIdIntoPreference(sessionId)
+    }
+
+    override fun getSessionIdFromPreference(): String? {
+        return appPreferencesHelper.getSessionIdFromPreference()
     }
 
     override fun setGenresSelected() {
@@ -80,4 +90,11 @@ constructor(
         return appPreferencesHelper.getUserGenres()
     }
 
+    override fun requestAuthenticationToken(apiKey: String): Observable<AuthenticationToken> {
+        return appApiHelper.requestAuthenticationToken(apiKey)
+    }
+
+    override fun getSessionId(apiKey: String, requestToken: String): Observable<Session> {
+        return appApiHelper.getSessionId(apiKey, requestToken)
+    }
 }

@@ -13,8 +13,6 @@ import javax.inject.Inject
 import android.R.id.edit
 
 
-
-
 class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Context) :
     PreferencesHelper {
 
@@ -26,7 +24,7 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Cont
     private val IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN"
     private val LOGGED_IN_USER_ID = "USER_ID"
     private val LOGGED_IN_USER_NAME = "USER_NAME"
-    private val AUTHENTICATION_TOKEN = "AUTHENTICATION_TOKEN"
+    private val SESSION_ID = "SESSION_ID"
 
     private val sharedPreferences: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -45,6 +43,17 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Cont
 
     override fun setIsUserLoggedIn() {
         sharedPreferences.edit().putBoolean(IS_USER_LOGGED_IN, true).apply()
+    }
+
+    override fun getSessionIdFromPreference(): String? {
+        return if (sharedPreferences.getString(SESSION_ID, NULL_TYPE) == NULL_TYPE)
+            null
+        else
+            sharedPreferences.getString(SESSION_ID, NULL_TYPE)
+    }
+
+    override fun setSessionIdIntoPreference(sessionId: String?) {
+        sharedPreferences.edit().putString(SESSION_ID, sessionId ?: NULL_TYPE).apply()
     }
 
     override fun getUserGenres(): String? {

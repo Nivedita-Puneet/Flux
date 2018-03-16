@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager
 import android.view.Menu
 import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
+import com.vicky7230.flux.ui.login.LoginActivity
 import com.vicky7230.flux.utils.BottomNavigationViewHelper
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector

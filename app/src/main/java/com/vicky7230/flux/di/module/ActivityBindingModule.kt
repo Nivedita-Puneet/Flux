@@ -5,6 +5,8 @@ import com.vicky7230.flux.ui.genres.GenresActivityModule
 import com.vicky7230.flux.ui.home.FragmentProvider
 import com.vicky7230.flux.ui.home.HomeActivity
 import com.vicky7230.flux.ui.home.HomeActivityModule
+import com.vicky7230.flux.ui.login.LoginActivity
+import com.vicky7230.flux.ui.login.LoginActivityModule
 import com.vicky7230.flux.ui.splash.SplashActivity
 import com.vicky7230.flux.ui.splash.SplashActivityModule
 import dagger.Module
@@ -25,4 +27,8 @@ abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector(modules = [(HomeActivityModule::class), (FragmentProvider::class)])
     abstract fun bindHomeActivity(): HomeActivity
+
+    @ContributesAndroidInjector(modules = [(LoginActivityModule::class)])
+    abstract fun bindLoginActivity(): LoginActivity
+
 }

@@ -14,4 +14,6 @@ interface PreferencesHelper {
     fun getGenresSelected(): Boolean
     fun setIsUserLoggedIn()
     fun getIsUserLoggedIn(): Boolean
+    fun setSessionIdIntoPreference(sessionId: String?)
+    fun getSessionIdFromPreference(): String?
 }
