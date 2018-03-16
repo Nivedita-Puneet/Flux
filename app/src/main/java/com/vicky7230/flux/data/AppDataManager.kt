@@ -20,6 +20,14 @@ constructor(
     private val appDbHelper: AppDbHelper
 ) : DataManager {
 
+    override fun setIsUserLoggedIn() {
+        appPreferencesHelper.setIsUserLoggedIn()
+    }
+
+    override fun getIsUserLoggedIn(): Boolean {
+        return appPreferencesHelper.getIsUserLoggedIn()
+    }
+
     override fun setGenresSelected() {
         appPreferencesHelper.setGenresSelected()
     }

@@ -19,7 +19,9 @@ class DiscoverItemOffsetDecoration(private val offset: Int) : RecyclerView.ItemD
         outRect.left = offset
         outRect.right = offset
         outRect.bottom = offset
-        outRect.top = offset
+        if (parent.getChildAdapterPosition(view) == 0)
+            outRect.top = offset
+
     }
 
 }

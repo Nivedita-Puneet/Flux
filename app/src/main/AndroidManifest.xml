@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.vicky7230.flux.EZSeriesApplication"
+        android:name=".EZSeriesApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.vicky7230.flux.ui.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.vicky7230.flux.ui.genres.GenresActivity"
+            android:name=".ui.genres.GenresActivity"
             android:label="Select genres"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.vicky7230.flux.ui.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:label="EZSeries"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.home.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
 

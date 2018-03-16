@@ -13,4 +13,12 @@ class HomePresenter<V : HomeMvpView> @Inject constructor(
     private val compositeDisposable: CompositeDisposable
 ) : BasePresenter<V>(dataManager, compositeDisposable), HomeMvpPresenter<V> {
 
+    override fun checkIfUserLoggedIn(fragment: String) {
+        if (dataManager.getIsUserLoggedIn())
+            mvpView?.changeFragment(fragment)
+        else
+            mvpView?.showLoginScreen()
+
+    }
+
 }

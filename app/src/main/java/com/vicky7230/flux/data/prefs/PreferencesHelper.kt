@@ -12,4 +12,6 @@ interface PreferencesHelper {
     fun getBaseImageUrl(): String?
     fun setGenresSelected()
     fun getGenresSelected(): Boolean
+    fun setIsUserLoggedIn()
+    fun getIsUserLoggedIn(): Boolean
 }

@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.view.Menu
 import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
-import com.vicky7230.flux.ui.home.discover.DiscoverFragment
-import com.vicky7230.flux.ui.home.playlist.PlaylistFragment
-import com.vicky7230.flux.ui.home.profile.ProfileFragment
-import com.vicky7230.flux.ui.home.tv.TvFragment
 import com.vicky7230.flux.utils.BottomNavigationViewHelper
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -23,10 +20,15 @@ import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
 
+    val PLAYLIST = "playlist"
+    val PROFILE = "profile"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     lateinit var presenter: HomeMvpPresenter<HomeMvpView>
+    @Inject
+    lateinit var viewPagerAdapter: ViewPagerAdapter
 
     companion object {
         fun getStartIntent(context: Context): Intent {
@@ -48,44 +50,69 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        viewPager.offscreenPageLimit = 3
+        viewPager.adapter = viewPagerAdapter
+
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener({
-            val fragment: Fragment
             when (it.itemId) {
                 R.id.tv -> {
-                    fragment = TvFragment.newInstance()
-                    loadFragment(fragment)
+                    viewPager.setCurrentItem(0, true)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.discover -> {
-                    fragment = DiscoverFragment.newInstance()
-                    loadFragment(fragment)
+                    viewPager.setCurrentItem(1, true)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.playlist -> {
-                    fragment = PlaylistFragment.newInstance()
-                    loadFragment(fragment)
-                    return@setOnNavigationItemSelectedListener true
+                    presenter.checkIfUserLoggedIn(PLAYLIST)
+                    //return@setOnNavigationItemSelectedListener true
                 }
                 R.id.profile -> {
-                    fragment = ProfileFragment.newInstance()
-                    loadFragment(fragment)
-                    return@setOnNavigationItemSelectedListener true
+                    presenter.checkIfUserLoggedIn(PROFILE)
+                    //return@setOnNavigationItemSelectedListener true
                 }
             }
 
             false
         })
 
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bottomNavigationView.menu.getItem(position).isChecked = true
+            }
+        })
+
         bottomNavigationView.selectedItemId = R.id.tv
         //loadFragment(TvFragment.newInstance())
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_container, fragment)
-        transaction.commit()
+    override fun changeFragment(fragment: String) {
+        when (fragment) {
+            PLAYLIST -> {
+                viewPager.setCurrentItem(2, true)
+                bottomNavigationView.menu.getItem(2).isChecked = true
+            }
+            PROFILE -> {
+                viewPager.setCurrentItem(3, true)
+                bottomNavigationView.menu.getItem(3).isChecked = true
+            }
+        }
+    }
+
+    override fun showLoginScreen() {
+        startActivity(LoginActivity.getStartIntent(this))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

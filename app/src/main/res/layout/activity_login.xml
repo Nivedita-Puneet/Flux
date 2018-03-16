@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vicky7230.flux.ui.home.LoginActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/close_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_black_24dp" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        app:srcCompat="@drawable/playstore_icon" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/appName"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:fontFamily="@font/passion_one_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/description"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/login_button"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/login_button_bg"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:text="LOGIN WITH TMDb"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="sans-serif-condensed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/tmdb_atribution" />
+
+</android.support.constraint.ConstraintLayout>
