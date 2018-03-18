@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 
 import com.vicky7230.flux.R
@@ -59,6 +61,8 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
     }
 
     override fun showGenres(genres: MutableList<Genre>) {
+        progress.visibility = GONE
+        genres_list.visibility = VISIBLE
         discoverAdapter.addItems(genres)
     }
 

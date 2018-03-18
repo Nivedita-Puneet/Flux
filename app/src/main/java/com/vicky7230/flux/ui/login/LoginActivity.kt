@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.jakewharton.rxbinding2.view.RxView
 import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
@@ -12,18 +14,19 @@ import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginMvpView {
-
     @Inject
     lateinit var presenter: LoginMvpPresenter<LoginMvpView>
 
     var requestToken: String? = null
 
     companion object {
+
         fun getStartIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
-
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        login_button.visibility = GONE
+        progress_bar.visibility = VISIBLE
         presenter.getSessionId(requestToken)
     }
 
@@ -52,6 +55,10 @@ class LoginActivity : BaseActivity(), LoginMvpView {
         )
         intent.`package` = "com.android.chrome"
         startActivity(intent)
+    }
+
+    override fun finishLosinScreen() {
+        finish()
     }
 
     override fun onDestroy() {

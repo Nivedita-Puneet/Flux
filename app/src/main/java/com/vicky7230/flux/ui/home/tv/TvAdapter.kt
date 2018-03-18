@@ -40,6 +40,11 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
         diffResult.dispatchUpdatesTo(this)
     }
 
+    fun clearItems() {
+        resultList?.clear()
+        notifyDataSetChanged()
+    }
+
     fun addItem(recipe: Result?) {
         resultList?.add(recipe!!)
         notifyItemInserted(resultList!!.size - 1)
@@ -62,13 +67,15 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
     }
 
     private fun createResultViewHolder(parent: ViewGroup?): RecyclerView.ViewHolder {
-        return ResultViewHolder(
+        val resultViewHolder = ResultViewHolder(
             LayoutInflater.from(parent?.context).inflate(
                 R.layout.tv_list_item,
                 parent,
                 false
             )
         )
+
+        return resultViewHolder
     }
 
     private fun createLoadingViewHolder(parent: ViewGroup?): RecyclerView.ViewHolder {
@@ -103,7 +110,8 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
         fun onBind(result: Result?) {
             GlideApp
                 .with(itemView.context)
-                .load("https://image.tmdb.org/t/p/w780/" + result?.backdropPath)
+                .load("https://image.tmdb.org/t/p/w780/" + result?.posterPath)
+                .error(R.drawable.not_found)
                 .transition(withCrossFade())
                 .centerCrop()
                 .into(itemView.tv_image)
@@ -114,7 +122,7 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
             result?.genreIds?.forEach { t -> genres = genres.plus(AppConstants.genres[t] + ", ") }
             itemView.tv_genres.text = genres.dropLast(2)
 
-            itemView.rating.text = result?.voteAverage.toString()
+            itemView.rating_spinner.text = result?.voteAverage.toString()
         }
     }
 

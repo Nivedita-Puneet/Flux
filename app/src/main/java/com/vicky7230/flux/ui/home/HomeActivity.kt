@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
 import com.vicky7230.flux.ui.login.LoginActivity
@@ -119,6 +121,16 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_home, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.search -> {
+                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

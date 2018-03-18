@@ -7,5 +7,6 @@ import com.vicky7230.flux.ui.base.MvpView
  */
 interface LoginMvpView : MvpView {
     fun launchBrowserForLogin(requestToken: String?)
+    fun finishLosinScreen()
 
 }

@@ -6,8 +6,17 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tvtList"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/tv_list_item" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:theme="@style/AppTheme.OrangeAccent" />
 
 </FrameLayout>

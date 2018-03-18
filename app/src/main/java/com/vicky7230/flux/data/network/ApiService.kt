@@ -3,6 +3,7 @@ package com.vicky7230.flux.data.network
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
+import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import io.reactivex.Observable
@@ -34,7 +35,9 @@ interface ApiService {
     fun getTvByGenres(
         @Query("api_key") apiKey: String,
         @Query("with_genres") withGenres: String,
-        @Query("page") page: String
+        @Query("page") page: String,
+        @Query("sort_by") sortBy: String,
+        @Query("vote_average.gte") voteAverage: String
     ): Observable<Results>
 
     @GET("authentication/token/new")
@@ -48,5 +51,9 @@ interface ApiService {
         @Query("request_token") requestToken: String
     ): Observable<Session>
 
-
+    @GET("account")
+    fun getAccountDetails(
+        @Query("api_key") apiKey: String,
+        @Query("session_id") sessionId: String
+    ): Observable<Account>
 }

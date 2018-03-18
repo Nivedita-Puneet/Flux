@@ -30,7 +30,7 @@ class LoginPresenter<V : LoginMvpView> @Inject constructor(
                         return@subscribe
                     mvpView?.hideLoading()
                     if (authenticationToken != null) {
-                        if (authenticationToken.success!!) {
+                        if (authenticationToken.success == true) {
                             mvpView?.launchBrowserForLogin(authenticationToken.requestToken)
                         } else {
                             mvpView?.showError("Something went wrong.")
@@ -47,7 +47,7 @@ class LoginPresenter<V : LoginMvpView> @Inject constructor(
     }
 
     override fun getSessionId(requestToken: String?) {
-        mvpView?.showLoading()
+        //mvpView?.showLoading()
         compositeDisposable.add(
             dataManager.getSessionId(
                 Config.API_KEY,
@@ -64,10 +64,11 @@ class LoginPresenter<V : LoginMvpView> @Inject constructor(
                 .subscribe({ session ->
                     if (!isViewAttached())
                         return@subscribe
-                    mvpView?.hideLoading()
+                    //mvpView?.hideLoading()
                     if (session != null) {
                         if (session.success == true) {
                             mvpView?.showMessage("Login Successful.")
+                            mvpView?.finishLosinScreen()
                         } else {
                             mvpView?.showError("Something went wrong.")
                         }
@@ -75,7 +76,7 @@ class LoginPresenter<V : LoginMvpView> @Inject constructor(
                 }, { throwable ->
                     if (!isViewAttached())
                         return@subscribe
-                    mvpView?.hideLoading()
+                    //mvpView?.hideLoading()
                     mvpView?.showMessage(throwable.message!!)
                     Timber.e(throwable.message)
                 })

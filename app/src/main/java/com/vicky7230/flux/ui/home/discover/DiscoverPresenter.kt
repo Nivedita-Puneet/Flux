@@ -22,7 +22,7 @@ class DiscoverPresenter<V : DiscoverMvpView> @Inject constructor(
 ) : BasePresenter<V>(dataManager, compositeDisposable), DiscoverMvpPresenter<V> {
 
     override fun getGenresList() {
-        mvpView?.showLoading()
+        //mvpView?.showLoading()
         compositeDisposable.add(
             Observable.zip(
                 dataManager.getGenresTv(Config.API_KEY),
@@ -36,16 +36,16 @@ class DiscoverPresenter<V : DiscoverMvpView> @Inject constructor(
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ genres: MutableList<Genre>? ->
+                .subscribe({ genres ->
                     if (!isViewAttached())
                         return@subscribe
-                    mvpView?.hideLoading()
+                    //mvpView?.hideLoading()
                     if (genres != null)
                         mvpView?.showGenres(genres)
                 }, { throwable ->
                     if (!isViewAttached())
                         return@subscribe
-                    mvpView?.hideLoading()
+                    //mvpView?.hideLoading()
                     mvpView?.showMessage(throwable.message!!)
                     Timber.e(throwable.message)
                 })

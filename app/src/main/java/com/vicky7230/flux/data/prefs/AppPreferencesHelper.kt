@@ -20,11 +20,14 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Cont
     private val USER_GENRES = "USER_GENRES"
     private val BASE_IMAGE_URL = "BASE_IMAGE_URL"
     private val ARE_GENRES_SELECTED = "ARE_GENRES_SELECTED"
+
     //for session handling
     private val IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN"
-    private val LOGGED_IN_USER_ID = "USER_ID"
+    private val ACCOUNT_ID = "ACCOUNT_ID"
     private val LOGGED_IN_USER_NAME = "USER_NAME"
+    private val LOGGED_IN_PERSON_NAME = "PERSON_NAME"
     private val SESSION_ID = "SESSION_ID"
+    //for session handling
 
     private val sharedPreferences: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)

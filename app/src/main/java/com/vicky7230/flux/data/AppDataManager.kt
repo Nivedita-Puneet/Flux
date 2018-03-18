@@ -6,6 +6,7 @@ import com.vicky7230.flux.data.network.AppApiHelper
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
+import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
@@ -77,9 +78,11 @@ constructor(
     override fun getTvByGenres(
         apiKey: String,
         withGenres: String,
-        page: String
+        page: String,
+        sortBy: String,
+        voteAverage: String
     ): Observable<Results> {
-        return appApiHelper.getTvByGenres(apiKey, withGenres, page)
+        return appApiHelper.getTvByGenres(apiKey, withGenres, page, sortBy, voteAverage)
     }
 
     override fun setUserGenres(genres: String?): Observable<Boolean> {
@@ -96,5 +99,9 @@ constructor(
 
     override fun getSessionId(apiKey: String, requestToken: String): Observable<Session> {
         return appApiHelper.getSessionId(apiKey, requestToken)
+    }
+
+    override fun getAccountDetails(apiKey: String, sessionId: String): Observable<Account> {
+        return appApiHelper.getAccountDetails(apiKey, sessionId)
     }
 }

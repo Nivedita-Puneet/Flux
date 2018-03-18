@@ -1,4 +1,4 @@
-package com.vicky7230.flux.ui.home.tv
+package com.vicky7230.flux.ui.home.profile
 
 import com.vicky7230.flux.data.Config
 import com.vicky7230.flux.data.DataManager
@@ -10,37 +10,28 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Created by vicky on 27/2/18.
+ * Created by vicky on 18/3/18.
  */
-class TvPresenter<V : TvMvpView> @Inject constructor(
+class ProfilePresenter<V : ProfileMvpView> @Inject constructor(
     private val dataManager: DataManager,
     private val compositeDisposable: CompositeDisposable
-) : BasePresenter<V>(dataManager, compositeDisposable), TvMvpPresenter<V> {
+) : BasePresenter<V>(dataManager, compositeDisposable), ProfileMvpPresenter<V> {
 
-    private var page = 1
+    override fun getAccountDetails() {
 
-    override fun resetPageVariable() {
-        page = 1
-    }
-
-    override fun getTvs(sortBy: String, ratingMoreThan: Int) {
         compositeDisposable.add(
-            dataManager.getTvByGenres(
+            dataManager.getAccountDetails(
                 Config.API_KEY,
-                dataManager.getUserGenres() ?: "",
-                page.toString(),
-                sortBy,
-                ratingMoreThan.toString()
+                dataManager.getSessionIdFromPreference() ?: ""
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
+                .subscribe({ account ->
                     if (!isViewAttached())
                         return@subscribe
                     //mvpView?.hideLoading()
-                    if (results.results != null) {
-                        mvpView?.updateTvList(results.results!!)
-                        ++page
+                    if (account != null) {
+                        mvpView?.showAccountDetails(account)
                     }
                 }, { throwable ->
                     if (!isViewAttached())
@@ -49,6 +40,8 @@ class TvPresenter<V : TvMvpView> @Inject constructor(
                     mvpView?.showMessage(throwable.message!!)
                     Timber.e(throwable.message)
                 })
+
         )
     }
+
 }
