@@ -3,10 +3,10 @@ package com.vicky7230.flux.data
 import com.vicky7230.flux.data.db.AppDbHelper
 import com.vicky7230.flux.data.db.room.model.ConfigurationDbModel
 import com.vicky7230.flux.data.network.AppApiHelper
+import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
-import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
@@ -22,6 +22,30 @@ constructor(
     private val appPreferencesHelper: AppPreferencesHelper,
     private val appDbHelper: AppDbHelper
 ) : DataManager {
+
+    override fun setAccountId(accountId: Int?) {
+        appPreferencesHelper.setAccountId(accountId)
+    }
+
+    override fun getAccountId(): Int? {
+        return appPreferencesHelper.getAccountId()
+    }
+
+    override fun getUserName(): String? {
+        return appPreferencesHelper.getUserName()
+    }
+
+    override fun setUserName(userName: String?) {
+        appPreferencesHelper.setUserName(userName)
+    }
+
+    override fun getName(): String? {
+        return appPreferencesHelper.getName()
+    }
+
+    override fun setName(name: String?) {
+        return appPreferencesHelper.setName(name)
+    }
 
     override fun setIsUserLoggedIn() {
         appPreferencesHelper.setIsUserLoggedIn()

@@ -18,30 +18,39 @@ class ProfilePresenter<V : ProfileMvpView> @Inject constructor(
 ) : BasePresenter<V>(dataManager, compositeDisposable), ProfileMvpPresenter<V> {
 
     override fun getAccountDetails() {
-
-        compositeDisposable.add(
-            dataManager.getAccountDetails(
-                Config.API_KEY,
-                dataManager.getSessionIdFromPreference() ?: ""
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ account ->
-                    if (!isViewAttached())
-                        return@subscribe
-                    //mvpView?.hideLoading()
-                    if (account != null) {
-                        mvpView?.showAccountDetails(account)
-                    }
-                }, { throwable ->
-                    if (!isViewAttached())
-                        return@subscribe
-                    //mvpView?.hideLoading()
-                    mvpView?.showMessage(throwable.message!!)
-                    Timber.e(throwable.message)
-                })
-
-        )
+        if (dataManager.getIsUserLoggedIn()) {
+            compositeDisposable.add(
+                dataManager.getAccountDetails(
+                    Config.API_KEY,
+                    dataManager.getSessionIdFromPreference() ?: ""
+                )
+                    .map({ account ->
+                        if (account.name != null &&
+                            account.username != null &&
+                            account.id != null) {
+                            dataManager.setAccountId(account.id)
+                            dataManager.setName(account.name)
+                            dataManager.setUserName(account.username)
+                        }
+                        account
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ account ->
+                        if (!isViewAttached())
+                            return@subscribe
+                        //mvpView?.hideLoading()
+                        if (account != null) {
+                            mvpView?.showAccountDetails(account)
+                        }
+                    }, { throwable ->
+                        if (!isViewAttached())
+                            return@subscribe
+                        //mvpView?.hideLoading()
+                        mvpView?.showMessage(throwable.message!!)
+                        Timber.e(throwable.message)
+                    }))
+        }
     }
 
 }

@@ -16,4 +16,10 @@ interface PreferencesHelper {
     fun getIsUserLoggedIn(): Boolean
     fun setSessionIdIntoPreference(sessionId: String?)
     fun getSessionIdFromPreference(): String?
+    fun setAccountId(accountId: Int?)
+    fun getAccountId(): Int?
+    fun getUserName(): String?
+    fun setUserName(userName: String?)
+    fun getName(): String?
+    fun setName(name: String?)
 }

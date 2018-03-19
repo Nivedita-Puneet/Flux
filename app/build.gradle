@@ -52,8 +52,6 @@ dependencies {
     implementation "com.google.dagger:dagger:${versions.dagger}"
     implementation "com.google.dagger:dagger-android:${versions.dagger}"
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
@@ -67,6 +65,7 @@ dependencies {
     implementation "com.github.franmontiel:AttributionPresenter:${versions.attributionPresenter}"
     implementation "org.sufficientlysecure:html-textview:${versions.htmlTextview}"
     implementation "de.hdodenhof:circleimageview:${versions.circleimageview}"
+    implementation "org.greenrobot:eventbus:${versions.eventbus}"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

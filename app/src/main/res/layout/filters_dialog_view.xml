@@ -31,7 +31,7 @@
 
         <View
             android:layout_width="60dp"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/sort_by_spinner"
@@ -56,7 +56,7 @@
 
         <View
             android:layout_width="60dp"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/rating_spinner"

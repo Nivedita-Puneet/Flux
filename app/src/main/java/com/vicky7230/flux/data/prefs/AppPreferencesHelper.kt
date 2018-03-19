@@ -10,7 +10,6 @@ import android.preference.PreferenceManager
 import com.vicky7230.flux.di.ApplicationContext
 import io.reactivex.Observable
 import javax.inject.Inject
-import android.R.id.edit
 
 
 class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Context) :
@@ -24,8 +23,8 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Cont
     //for session handling
     private val IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN"
     private val ACCOUNT_ID = "ACCOUNT_ID"
-    private val LOGGED_IN_USER_NAME = "USER_NAME"
-    private val LOGGED_IN_PERSON_NAME = "PERSON_NAME"
+    private val USER_NAME = "USER_NAME"
+    private val NAME = "NAME"
     private val SESSION_ID = "SESSION_ID"
     //for session handling
 
@@ -57,6 +56,39 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext context: Cont
 
     override fun setSessionIdIntoPreference(sessionId: String?) {
         sharedPreferences.edit().putString(SESSION_ID, sessionId ?: NULL_TYPE).apply()
+    }
+
+    override fun getAccountId(): Int? {
+        return if (sharedPreferences.getInt(ACCOUNT_ID, -1) == -1)
+            null
+        else
+            sharedPreferences.getInt(ACCOUNT_ID, -1)
+    }
+
+    override fun setAccountId(accountId: Int?) {
+        sharedPreferences.edit().putInt(ACCOUNT_ID, accountId ?: -1).apply()
+    }
+
+    override fun getUserName(): String? {
+        return if (sharedPreferences.getString(USER_NAME, NULL_TYPE) == NULL_TYPE)
+            null
+        else
+            sharedPreferences.getString(USER_NAME, NULL_TYPE)
+    }
+
+    override fun setUserName(userName: String?) {
+        sharedPreferences.edit().putString(USER_NAME, userName ?: NULL_TYPE).apply()
+    }
+
+    override fun getName(): String? {
+        return if (sharedPreferences.getString(NAME, NULL_TYPE) == NULL_TYPE)
+            null
+        else
+            sharedPreferences.getString(NAME, NULL_TYPE)
+    }
+
+    override fun setName(name: String?) {
+        sharedPreferences.edit().putString(NAME, name ?: NULL_TYPE).apply()
     }
 
     override fun getUserGenres(): String? {

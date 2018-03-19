@@ -6,12 +6,17 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.ui.base.BaseFragment
+import com.vicky7230.flux.ui.home.LoginSuccessfulEvent
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 
@@ -42,14 +47,30 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
     }
 
     override fun setUp(view: View) {
-        //TODO
-        // check if user is logged in, then get account details and save them into preferences
-        //presenter.getAccountDetails()
+        presenter.getAccountDetails()
     }
 
     override fun showAccountDetails(account: Account) {
+        profile_progress_bar.visibility = GONE
         name.text = account.name
         user_name.text = account.username
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onLoginSuccessfulEvent(event: LoginSuccessfulEvent) {
+        //showMessage("Got Event.")
+        presenter.getAccountDetails()
+        EventBus.getDefault().removeAllStickyEvents()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onDestroyView() {

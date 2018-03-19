@@ -18,10 +18,13 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_home.*
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 
 class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
+
+    private val LOGIN_REQUEST: Int = 802
 
     val PLAYLIST = "playlist"
     val PROFILE = "profile"
@@ -115,7 +118,15 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
     }
 
     override fun showLoginScreen() {
-        startActivity(LoginActivity.getStartIntent(this))
+        startActivityForResult(LoginActivity.getStartIntent(this), LOGIN_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == LOGIN_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                EventBus.getDefault().postSticky(LoginSuccessfulEvent())
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

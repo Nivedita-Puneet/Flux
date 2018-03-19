@@ -52,6 +52,7 @@
         tools:text="vicky7230" />
 
     <ProgressBar
+        android:id="@+id/profile_progress_bar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:theme="@style/AppTheme.OrangeAccent"

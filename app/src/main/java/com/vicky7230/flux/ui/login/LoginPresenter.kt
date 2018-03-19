@@ -68,7 +68,7 @@ class LoginPresenter<V : LoginMvpView> @Inject constructor(
                     if (session != null) {
                         if (session.success == true) {
                             mvpView?.showMessage("Login Successful.")
-                            mvpView?.finishLosinScreen()
+                            mvpView?.finishLoginScreen()
                         } else {
                             mvpView?.showError("Something went wrong.")
                         }

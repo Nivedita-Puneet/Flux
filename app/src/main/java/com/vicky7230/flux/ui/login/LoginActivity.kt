@@ -1,5 +1,6 @@
 package com.vicky7230.flux.ui.login
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -23,6 +24,7 @@ class LoginActivity : BaseActivity(), LoginMvpView {
 
         fun getStartIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         login_button.visibility = GONE
@@ -57,7 +59,8 @@ class LoginActivity : BaseActivity(), LoginMvpView {
         startActivity(intent)
     }
 
-    override fun finishLosinScreen() {
+    override fun finishLoginScreen() {
+        setResult(Activity.RESULT_OK)
         finish()
     }
 
