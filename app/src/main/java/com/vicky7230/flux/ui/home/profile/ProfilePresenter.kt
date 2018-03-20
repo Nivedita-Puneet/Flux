@@ -39,17 +39,16 @@ class ProfilePresenter<V : ProfileMvpView> @Inject constructor(
                     .subscribe({ account ->
                         if (!isViewAttached())
                             return@subscribe
-                        //mvpView?.hideLoading()
                         if (account != null) {
                             mvpView?.showAccountDetails(account)
                         }
                     }, { throwable ->
                         if (!isViewAttached())
                             return@subscribe
-                        //mvpView?.hideLoading()
-                        mvpView?.showMessage(throwable.message!!)
-                        Timber.e(throwable.message)
-                    }))
+                        handleApiError(throwable)
+                        Timber.i(throwable)
+                    })
+            )
         }
     }
 
