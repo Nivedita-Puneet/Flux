@@ -21,17 +21,8 @@
             android:layout_height="240dp"
             tools:ignore="ContentDescription" />
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/image_view_like"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/ic_heart_white_60dp" />
-
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/rating_spinner"
+            android:id="@+id/rating_circle"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="bottom|end"

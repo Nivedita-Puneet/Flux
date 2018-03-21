@@ -169,7 +169,7 @@ class TvFragment : BaseFragment(), TvMvpView {
     }
 
     private fun setUpRatingSpinner(dialogView: View) {
-        val ratingSpinner = dialogView.findViewById(R.id.rating_spinner) as AppCompatSpinner
+        val ratingSpinner = dialogView.findViewById(R.id.rating_circle) as AppCompatSpinner
         val adapter = ArrayAdapter(
             activity,
             android.R.layout.simple_spinner_item,

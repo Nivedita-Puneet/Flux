@@ -1,10 +1,9 @@
 package com.vicky7230.flux.ui.home.tv
 
+import android.os.Handler
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
@@ -12,13 +11,14 @@ import com.vicky7230.flux.ui.home.ResultDiffUtilCallback
 import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
 import kotlinx.android.synthetic.main.tv_list_item.view.*
+import timber.log.Timber
 
 
 /**
  * Created by vicky on 27/2/18.
  */
 class TvAdapter(private val resultList: MutableList<Result>?) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_LOADING = -1
     private val TYPE_RESULT = 1
@@ -30,12 +30,12 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
         newResultList.addAll(resultList!!)
 
         val diffResult =
-            DiffUtil.calculateDiff(
-                ResultDiffUtilCallback(
-                    this.resultList,
-                    newResultList
+                DiffUtil.calculateDiff(
+                        ResultDiffUtilCallback(
+                                this.resultList,
+                                newResultList
+                        )
                 )
-            )
         this.resultList.addAll(resultList)
         diffResult.dispatchUpdatesTo(this)
     }
@@ -67,24 +67,33 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
     }
 
     private fun createResultViewHolder(parent: ViewGroup?): RecyclerView.ViewHolder {
+
         val resultViewHolder = ResultViewHolder(
-            LayoutInflater.from(parent?.context).inflate(
-                R.layout.tv_list_item,
-                parent,
-                false
-            )
+                LayoutInflater.from(parent?.context).inflate(
+                        R.layout.tv_list_item,
+                        parent,
+                        false
+                )
         )
+
+        val myGestureDetector = GestureDetector(parent?.context, MyGestureDetector())
+
+        resultViewHolder.itemView.tv_image_card.setOnTouchListener(View.OnTouchListener { v, event ->
+            myGestureDetector.onTouchEvent(event)
+            return@OnTouchListener false
+        })
 
         return resultViewHolder
     }
 
+
     private fun createLoadingViewHolder(parent: ViewGroup?): RecyclerView.ViewHolder {
         return LoadingViewHolder(
-            LayoutInflater.from(parent?.context).inflate(
-                R.layout.tv_list_footer,
-                parent,
-                false
-            )
+                LayoutInflater.from(parent?.context).inflate(
+                        R.layout.tv_list_footer,
+                        parent,
+                        false
+                )
         )
     }
 
@@ -109,12 +118,12 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
     class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun onBind(result: Result?) {
             GlideApp
-                .with(itemView.context)
-                .load("https://image.tmdb.org/t/p/w780/" + result?.posterPath)
-                .error(R.drawable.not_found)
-                .transition(withCrossFade())
-                .centerCrop()
-                .into(itemView.tv_image)
+                    .with(itemView.context)
+                    .load("https://image.tmdb.org/t/p/w780/" + result?.posterPath)
+                    .error(R.drawable.not_found)
+                    .transition(withCrossFade())
+                    .centerCrop()
+                    .into(itemView.tv_image)
 
             itemView.tv_title.text = result?.originalName
 
@@ -122,7 +131,7 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
             result?.genreIds?.forEach { t -> genres = genres.plus(AppConstants.genres[t] + ", ") }
             itemView.tv_genres.text = genres.dropLast(2)
 
-            itemView.rating_spinner.text = result?.voteAverage.toString()
+            itemView.rating_circle.text = result?.voteAverage.toString()
         }
     }
 

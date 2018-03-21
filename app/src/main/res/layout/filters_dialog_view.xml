@@ -59,7 +59,7 @@
             android:layout_height="0dp" />
 
         <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/rating_spinner"
+            android:id="@+id/rating_circle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
