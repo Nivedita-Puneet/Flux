@@ -35,5 +35,7 @@ object AppConstants {
         53 to "Thriller",
         10752 to "War"
     )
+
+    val TV_ID = "tvId"
 }
 

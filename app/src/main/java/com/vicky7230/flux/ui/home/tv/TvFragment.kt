@@ -22,12 +22,13 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_tv.*
 import javax.inject.Inject
 import android.widget.AdapterView.OnItemSelectedListener
+import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class TvFragment : BaseFragment(), TvMvpView {
+class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
 
     @Inject
     lateinit var presenter: TvMvpPresenter<TvMvpView>
@@ -43,15 +44,15 @@ class TvFragment : BaseFragment(), TvMvpView {
     var ratingMoreThan = 0
 
     private val sortByList = listOf(
-        "Popularity",
-        "Rating",
-        "Air Date"
+            "Popularity",
+            "Rating",
+            "Air Date"
     )
 
     private val sortByMap = hashMapOf(
-        "Popularity" to "popularity.desc",
-        "Rating" to "vote_average.desc",
-        "Air Date" to "first_air_date.desc"
+            "Popularity" to "popularity.desc",
+            "Rating" to "vote_average.desc",
+            "Air Date" to "first_air_date.desc"
     )
 
     private val rating = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -73,18 +74,19 @@ class TvFragment : BaseFragment(), TvMvpView {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_tv, container, false)
         presenter.onAttach(this)
+        tvAdapter.setCallback(this)
         return view
     }
 
     override fun setUp(view: View) {
 
         val layoutInflater =
-            activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val dialogView = layoutInflater.inflate(R.layout.filters_dialog_view, null, false)
 
         setUpSortBySpinner(dialogView)
@@ -130,9 +132,9 @@ class TvFragment : BaseFragment(), TvMvpView {
 
                 if (visibleItemCount + pastVisibleItems >= totalItemCount && !isLoading) {
                     tvAdapter.addItem(
-                        Result(
-                            type = "LOADING"
-                        )
+                            Result(
+                                    type = "LOADING"
+                            )
                     )
                     presenter.getTvs(sortBy, ratingMoreThan)
                     isLoading = true
@@ -144,20 +146,21 @@ class TvFragment : BaseFragment(), TvMvpView {
     }
 
     private fun setUpSortBySpinner(dialogView: View) {
-        val sortBySpinner = dialogView.findViewById(R.id.sort_by_spinner) as AppCompatSpinner
+        //val sortBySpinner = dialogView.findViewById(R.id.sort_by_spinner) as AppCompatSpinner
+        val sortBySpinner = dialogView.findViewById<AppCompatSpinner>(R.id.sort_by_spinner)
         val adapter = ArrayAdapter(
-            activity,
-            android.R.layout.simple_spinner_item,
-            sortByList
+                activity,
+                android.R.layout.simple_spinner_item,
+                sortByList
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sortBySpinner.adapter = adapter
         sortBySpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 sortBy = sortByMap[sortByList[position]] ?: ""
             }
@@ -169,20 +172,21 @@ class TvFragment : BaseFragment(), TvMvpView {
     }
 
     private fun setUpRatingSpinner(dialogView: View) {
-        val ratingSpinner = dialogView.findViewById(R.id.rating_circle) as AppCompatSpinner
+        val ratingSpinner = dialogView.findViewById<AppCompatSpinner>(R.id.rating_circle)
+        //val ratingSpinner = dialogView.findViewById(R.id.rating_circle) as AppCompatSpinner
         val adapter = ArrayAdapter(
-            activity,
-            android.R.layout.simple_spinner_item,
-            rating
+                activity,
+                android.R.layout.simple_spinner_item,
+                rating
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         ratingSpinner.adapter = adapter
         ratingSpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
             ) {
                 ratingMoreThan = rating[position]
             }
@@ -202,6 +206,10 @@ class TvFragment : BaseFragment(), TvMvpView {
             tvAdapter.addItems(results)
             isLoading = false
         }
+    }
+
+    override fun onTvShowClick(id: Int) {
+        startActivity(TvDetailsActivity.getStartIntent(activity as Context, id.toString()))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

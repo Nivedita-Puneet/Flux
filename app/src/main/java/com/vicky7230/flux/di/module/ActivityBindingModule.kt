@@ -9,6 +9,8 @@ import com.vicky7230.flux.ui.login.LoginActivity
 import com.vicky7230.flux.ui.login.LoginActivityModule
 import com.vicky7230.flux.ui.splash.SplashActivity
 import com.vicky7230.flux.ui.splash.SplashActivityModule
+import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
+import com.vicky7230.flux.ui.tvDetails.TvDetailsActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -30,5 +32,8 @@ abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector(modules = [(LoginActivityModule::class)])
     abstract fun bindLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector(modules = [(TvDetailsActivityModule::class)])
+    abstract fun bindTvDetailsActivity(): TvDetailsActivity
 
 }

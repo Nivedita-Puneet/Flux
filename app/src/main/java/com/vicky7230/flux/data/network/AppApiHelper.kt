@@ -6,6 +6,7 @@ import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -27,11 +28,11 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
     }
 
     override fun getTvByGenres(
-        apiKey: String,
-        withGenres: String,
-        page: String,
-        sortBy: String,
-        voteAverage: String
+            apiKey: String,
+            withGenres: String,
+            page: String,
+            sortBy: String,
+            voteAverage: String
     ): Observable<Results> {
         return apiService.getTvByGenres(apiKey, withGenres, page, sortBy, voteAverage)
     }
@@ -46,5 +47,9 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
 
     override fun getAccountDetails(apiKey: String, sessionId: String): Observable<Account> {
         return apiService.getAccountDetails(apiKey, sessionId)
+    }
+
+    override fun getTvDetails(tvId: String, apiKey: String): Observable<TvDetails> {
+        return apiService.getTvDetails(tvId, apiKey)
     }
 }

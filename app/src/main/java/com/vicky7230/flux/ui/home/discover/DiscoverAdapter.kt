@@ -1,6 +1,5 @@
 package com.vicky7230.flux.ui.home.discover
 
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ import kotlinx.android.synthetic.main.discover_genre_list_item.view.*
  * Created by vicky on 15/3/18.
  */
 class DiscoverAdapter(private val genres: MutableList<Genre>?) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun addItems(genres: MutableList<Genre>?) {
         if (genres != null) {
@@ -27,7 +26,7 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
         return genres?.size ?: 0
     }
 
-    fun getItem(position: Int): Genre? {
+    private fun getItem(position: Int): Genre? {
         return if (position != RecyclerView.NO_POSITION)
             genres?.get(position)
         else
@@ -36,11 +35,11 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val genreViewHolder = DiscoverGenreViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.discover_genre_list_item,
-                parent,
-                false
-            )
+                LayoutInflater.from(parent.context).inflate(
+                        R.layout.discover_genre_list_item,
+                        parent,
+                        false
+                )
         )
 
         genreViewHolder.itemView.setOnClickListener({

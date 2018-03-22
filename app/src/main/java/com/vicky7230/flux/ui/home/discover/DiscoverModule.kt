@@ -1,6 +1,7 @@
 package com.vicky7230.flux.ui.home.discover
 
 import android.content.Context
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.vicky7230.flux.di.ApplicationContext
 import dagger.Module
@@ -17,13 +18,13 @@ class DiscoverModule {
     }
 
     @Provides
-    fun provideLinearLayoutManager(@ApplicationContext context: Context): LinearLayoutManager {
-        return LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    fun provideGridLayoutManager(@ApplicationContext context: Context): GridLayoutManager {
+        return GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
     }
 
     @Provides
     fun provideDiscoverItemOffsetDecoration(): DiscoverItemOffsetDecoration {
-        return DiscoverItemOffsetDecoration(20)
+        return DiscoverItemOffsetDecoration(15)
     }
 
     @Provides

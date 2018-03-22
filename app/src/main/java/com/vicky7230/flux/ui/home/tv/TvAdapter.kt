@@ -1,9 +1,10 @@
 package com.vicky7230.flux.ui.home.tv
 
-import android.os.Handler
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
@@ -11,7 +12,6 @@ import com.vicky7230.flux.ui.home.ResultDiffUtilCallback
 import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
 import kotlinx.android.synthetic.main.tv_list_item.view.*
-import timber.log.Timber
 
 
 /**
@@ -22,6 +22,16 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
 
     private val TYPE_LOADING = -1
     private val TYPE_RESULT = 1
+
+    interface Callback {
+        fun onTvShowClick(id: Int)
+    }
+
+    private var callback: Callback? = null
+
+    fun setCallback(callback: Callback) {
+        this.callback = callback
+    }
 
     fun addItems(resultList: MutableList<Result>?) {
 
@@ -76,11 +86,11 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
                 )
         )
 
-        val myGestureDetector = GestureDetector(parent?.context, MyGestureDetector())
-
-        resultViewHolder.itemView.tv_image_card.setOnTouchListener(View.OnTouchListener { v, event ->
-            myGestureDetector.onTouchEvent(event)
-            return@OnTouchListener false
+        resultViewHolder.itemView.tv_image_card.setOnClickListener({
+            val result = getItem(resultViewHolder.adapterPosition)
+            if (result != null) {
+                callback?.onTvShowClick(result.id ?: 0)
+            }
         })
 
         return resultViewHolder

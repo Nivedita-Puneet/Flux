@@ -4,7 +4,7 @@ package com.vicky7230.flux.ui.home.discover
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -27,7 +27,7 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
     @Inject
     lateinit var presenter: DiscoverMvpPresenter<DiscoverMvpView>
     @Inject
-    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var gridLayoutManager: GridLayoutManager
     @Inject
     lateinit var discoverItemOffsetDecoration: DiscoverItemOffsetDecoration
     @Inject
@@ -53,7 +53,7 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
 
     override fun setUp(view: View) {
 
-        genres_list.layoutManager = linearLayoutManager
+        genres_list.layoutManager = gridLayoutManager
         genres_list.addItemDecoration(discoverItemOffsetDecoration)
         genres_list.adapter = discoverAdapter
 

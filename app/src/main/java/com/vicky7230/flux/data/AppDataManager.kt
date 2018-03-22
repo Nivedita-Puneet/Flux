@@ -9,6 +9,7 @@ import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -18,9 +19,9 @@ import javax.inject.Inject
  */
 class AppDataManager @Inject
 constructor(
-    private val appApiHelper: AppApiHelper,
-    private val appPreferencesHelper: AppPreferencesHelper,
-    private val appDbHelper: AppDbHelper
+        private val appApiHelper: AppApiHelper,
+        private val appPreferencesHelper: AppPreferencesHelper,
+        private val appDbHelper: AppDbHelper
 ) : DataManager {
 
     override fun setAccountId(accountId: Int?) {
@@ -100,11 +101,11 @@ constructor(
     }
 
     override fun getTvByGenres(
-        apiKey: String,
-        withGenres: String,
-        page: String,
-        sortBy: String,
-        voteAverage: String
+            apiKey: String,
+            withGenres: String,
+            page: String,
+            sortBy: String,
+            voteAverage: String
     ): Observable<Results> {
         return appApiHelper.getTvByGenres(apiKey, withGenres, page, sortBy, voteAverage)
     }
@@ -127,5 +128,9 @@ constructor(
 
     override fun getAccountDetails(apiKey: String, sessionId: String): Observable<Account> {
         return appApiHelper.getAccountDetails(apiKey, sessionId)
+    }
+
+    override fun getTvDetails(tvId: String, apiKey: String): Observable<TvDetails> {
+        return appApiHelper.getTvDetails(tvId, apiKey)
     }
 }
