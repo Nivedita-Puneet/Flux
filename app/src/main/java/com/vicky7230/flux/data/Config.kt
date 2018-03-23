@@ -6,5 +6,6 @@ package com.vicky7230.flux.data
 object Config {
     val BASE_URL = "https://api.themoviedb.org/3/"
     val API_KEY = "efbe7fe8a51d9742de5c9ace72c04133"
+    val GOOGLE_KEY = "AIzaSyCtwDb8SdJUX4CU0nqJRo56k2thBcOxozA"
     val DB_NAME = "tv_db"
 }

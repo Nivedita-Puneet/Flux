@@ -1,5 +1,6 @@
 package com.vicky7230.flux.ui.tvDetails
 
+import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.ui.base.MvpView
 

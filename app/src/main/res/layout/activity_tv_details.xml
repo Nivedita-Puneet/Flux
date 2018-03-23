@@ -33,6 +33,7 @@
                 app:layout_collapseParallaxMultiplier="0.5" />
 
             <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/play_trailer"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

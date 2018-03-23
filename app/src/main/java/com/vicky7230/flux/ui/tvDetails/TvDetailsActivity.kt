@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.ui.base.BaseActivity
+import com.vicky7230.flux.ui.youtubePlayer.YoutubeActivity
 import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
 import dagger.android.AndroidInjection
@@ -69,7 +70,7 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView {
                     collapse_toolbar.title = tvDetails?.name
                     isShow = true
                 } else if (isShow) {
-                    collapse_toolbar.title = " "//careful there should a space between double quote otherwise it wont work
+                    collapse_toolbar.title = " "
                     isShow = false
                 }
             }
@@ -98,6 +99,15 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView {
         seasons.text = "${tvDetails?.numberOfSeasons.toString()} Seasons"
         rating.rating = ((tvDetails?.voteAverage?.div(10.0f) ?: 0.0f) * 5.0f)
         rating_float.text = tvDetails?.voteAverage.toString()
+
+
+        val key = tvDetails?.videos?.results?.find { result ->
+            result.type.equals("Trailer")
+        }?.key
+
+        play_trailer.setOnClickListener({
+            startActivity(YoutubeActivity.getStartIntent(this, key))
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

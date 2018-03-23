@@ -9,6 +9,7 @@ import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
 import io.reactivex.Observable

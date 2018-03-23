@@ -6,6 +6,7 @@ import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -62,6 +63,7 @@ interface ApiService {
     @GET("tv/{tv_id}")
     fun getTvDetails(
             @Path("tv_id") tvId: String,
-            @Query("api_key") apiKey: String
+            @Query("api_key") apiKey: String,
+            @Query("append_to_response") value: String = "videos"
     ): Observable<TvDetails>
 }

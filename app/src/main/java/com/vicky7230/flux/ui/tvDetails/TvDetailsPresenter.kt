@@ -43,5 +43,4 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
                         })
         )
     }
-
 }

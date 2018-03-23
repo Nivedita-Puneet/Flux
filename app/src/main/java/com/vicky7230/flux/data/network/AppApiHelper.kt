@@ -6,6 +6,7 @@ import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -14,7 +15,6 @@ import javax.inject.Inject
  * Created by vicky on 31/12/17.
  */
 class AppApiHelper @Inject constructor(private val apiService: ApiService) : ApiHelper {
-
     override fun getConfigurations(apiKey: String): Observable<Configuration> {
         return apiService.getConfigurations(apiKey)
     }
@@ -52,4 +52,5 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
     override fun getTvDetails(tvId: String, apiKey: String): Observable<TvDetails> {
         return apiService.getTvDetails(tvId, apiKey)
     }
+
 }

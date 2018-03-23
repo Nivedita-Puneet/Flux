@@ -49,7 +49,12 @@
                     android:scheme="flux" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.tvDetails.TvDetailsActivity"></activity>
+        <activity
+            android:name=".ui.tvDetails.TvDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.youtubePlayer.YoutubeActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
