@@ -32,7 +32,7 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
                                 return@subscribe
                             mvpView?.hideLoading()
                             if (tvDetails != null) {
-                               // mvpView?.showDetails(tvDetails)
+                                mvpView?.showDetails(tvDetails)
                             }
                         }, { throwable ->
                             if (!isViewAttached())
