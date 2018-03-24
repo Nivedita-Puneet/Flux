@@ -37,6 +37,11 @@ object AppConstants {
     )
 
     val TV_ID = "tvId"
-    val VIDEO_KEY = "viderKey"
+    val VIDEO_KEY = "videoKey"
+    val OVER_VIEW = "overview"
+    val NETWORK_LOGO = "networkLogo"
+    val NUM_SEASONS = "numberOfSeason"
+    val NUM_EPISODES = "numberOfEpisodes"
+    val GENRE_LIST = "genreList"
 }
 

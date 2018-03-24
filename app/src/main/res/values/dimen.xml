@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chipHeight">35dp</dimen>
+    <dimen name="chipPadding">9dp</dimen>
+    <dimen name="chipMargin">4.5dp</dimen>
+    <dimen name="chipMarginBig">9dp</dimen>
+</resources>

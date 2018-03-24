@@ -1,0 +1,14 @@
+package com.vicky7230.flux.ui.tvDetails.info
+
+import com.vicky7230.flux.ui.base.BasePresenter
+import javax.inject.Inject
+import io.reactivex.disposables.CompositeDisposable
+import com.vicky7230.flux.data.DataManager
+
+/**
+ * Created by vicky on 24/3/18.
+ */
+class InfoPresenter<V : InfoMvpView> @Inject constructor(
+        private val dataManager: DataManager,
+        private val compositeDisposable: CompositeDisposable
+) : BasePresenter<V>(dataManager, compositeDisposable), InfoMvpPresenter<V>

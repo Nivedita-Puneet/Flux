@@ -14,4 +14,9 @@ class TvDetailsActivityModule {
     fun provideTvDetailsMvpPresenter(presenter: TvDetailsPresenter<TvDetailsMvpView>): TvDetailsMvpPresenter<TvDetailsMvpView> {
         return presenter
     }
+
+    @Provides
+    fun provideDetailsPagerAdapter(tvDetailsActivity: TvDetailsActivity): DetailsPagerAdapter {
+        return DetailsPagerAdapter(tvDetailsActivity.supportFragmentManager, arrayListOf())
+    }
 }
