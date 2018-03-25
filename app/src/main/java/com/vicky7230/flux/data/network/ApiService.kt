@@ -64,6 +64,6 @@ interface ApiService {
     fun getTvDetails(
             @Path("tv_id") tvId: String,
             @Query("api_key") apiKey: String,
-            @Query("append_to_response") value: String = "videos"
+            @Query("append_to_response") value: String = "videos,reviews,credits"
     ): Observable<TvDetails>
 }

@@ -3,12 +3,13 @@ package com.vicky7230.flux.data.network.model.tvDetails
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Videos(
+data class Credits(
 
-        @SerializedName("id")
+        @SerializedName("cast")
         @Expose
-        var id: Int? = null,
-        @SerializedName("results")
+        var cast: List<Cast>? = null,
+        @SerializedName("crew")
         @Expose
-        var videoResults: List<VideoResult>? = null
+        var crew: List<Crew>? = null
+
 )

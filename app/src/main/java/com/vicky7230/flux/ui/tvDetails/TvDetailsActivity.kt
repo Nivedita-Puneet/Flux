@@ -12,10 +12,12 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.vicky7230.flux.R
+import com.vicky7230.flux.data.network.model.tvDetails.Cast
 import com.vicky7230.flux.data.network.model.tvDetails.Genre
+import com.vicky7230.flux.data.network.model.tvDetails.ReviewResult
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.ui.base.BaseActivity
-import com.vicky7230.flux.ui.tvDetails.cast.CastFragment
+import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
 import com.vicky7230.flux.ui.tvDetails.info.InfoFragment
 import com.vicky7230.flux.ui.tvDetails.seasons.SeasonsFragment
 import com.vicky7230.flux.ui.youtubePlayer.YoutubeActivity
@@ -76,7 +78,7 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
         displayTvDetails(tvDetails)
 
         play_trailer.setOnClickListener({
-            val key = tvDetails?.videos?.results?.find { result ->
+            val key = tvDetails?.videos?.videoResults?.find { result ->
                 result.type.equals("Trailer")
             }?.key
             startActivity(YoutubeActivity.getStartIntent(this, key))
@@ -135,12 +137,15 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
                         tvDetails?.networks?.get(0)?.logoPath,
                         tvDetails?.numberOfSeasons,
                         tvDetails?.numberOfEpisodes,
+                        tvDetails?.overview,
                         tvDetails?.genres as ArrayList<Genre>?,
-                        tvDetails?.overview
+                        tvDetails?.credits?.cast as ArrayList<Cast>?
                 )
         )
         fragments.add(SeasonsFragment.newInstance())
-        fragments.add(CastFragment.newInstance())
+        fragments.add(ReviewsFragment.newInstance(
+                tvDetails?.reviews?.reviewResults as ArrayList<ReviewResult>?
+        ))
 
         viewpager.adapter = tvDetailsPagerAdapter
         tvDetailsPagerAdapter.addItems(fragments)

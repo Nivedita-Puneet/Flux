@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatButton
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.google.android.flexbox.FlexboxLayout
 import com.vicky7230.flux.R
+import com.vicky7230.flux.data.network.model.tvDetails.Cast
 import com.vicky7230.flux.data.network.model.tvDetails.Genre
 import com.vicky7230.flux.ui.base.BaseFragment
 import com.vicky7230.flux.utils.AppConstants
@@ -29,14 +31,19 @@ class InfoFragment : BaseFragment(), InfoMvpView {
 
     @Inject
     lateinit var presenter: InfoMvpPresenter<InfoMvpView>
+    @Inject
+    lateinit var linearLayoutManager: LinearLayoutManager
+    @Inject
+    lateinit var castListAdapter: CastListAdapter
 
     companion object {
         fun newInstance(
                 networkLogo: String?,
                 numberOfSeasons: Int?,
                 numberOfEpisodes: Int?,
+                overview: String?,
                 genres: ArrayList<Genre>?,
-                overview: String?): InfoFragment {
+                cast: ArrayList<Cast>?): InfoFragment {
             val infoFragment = InfoFragment()
             val args = Bundle()
             args.putString(AppConstants.NETWORK_LOGO, networkLogo)
@@ -44,6 +51,7 @@ class InfoFragment : BaseFragment(), InfoMvpView {
             args.putInt(AppConstants.NUM_EPISODES, numberOfEpisodes ?: 0)
             args.putString(AppConstants.OVER_VIEW, overview)
             args.putParcelableArrayList(AppConstants.GENRE_LIST, genres)
+            args.putParcelableArrayList(AppConstants.CAST_LIST, cast)
             infoFragment.arguments = args
             return infoFragment
         }
@@ -85,6 +93,11 @@ class InfoFragment : BaseFragment(), InfoMvpView {
 
             stoyline.text = arguments?.getString(AppConstants.OVER_VIEW)
 
+            cast_list.layoutManager = linearLayoutManager
+            cast_list.adapter = castListAdapter
+            val cast = arguments?.getParcelableArrayList<Cast>(AppConstants.CAST_LIST)
+            cast?.sortBy { it.order }
+            castListAdapter.addItems(cast)
         }
     }
 

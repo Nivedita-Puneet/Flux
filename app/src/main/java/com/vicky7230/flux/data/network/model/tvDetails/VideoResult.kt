@@ -3,7 +3,7 @@ package com.vicky7230.flux.data.network.model.tvDetails
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class VideoResult(
 
         @SerializedName("id")
         @Expose

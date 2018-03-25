@@ -85,5 +85,11 @@ data class TvDetails(
         var voteCount: Int? = null,
         @SerializedName("videos")
         @Expose
-        var videos: Videos? = null
+        var videos: Videos? = null,
+        @SerializedName("reviews")
+        @Expose
+        var reviews: Reviews? = null,
+        @SerializedName("credits")
+        @Expose
+        var credits: Credits? = null
 )

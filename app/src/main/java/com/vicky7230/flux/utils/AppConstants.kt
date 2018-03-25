@@ -43,5 +43,7 @@ object AppConstants {
     val NUM_SEASONS = "numberOfSeason"
     val NUM_EPISODES = "numberOfEpisodes"
     val GENRE_LIST = "genreList"
+    val CAST_LIST = "castList"
+    val REVIEWS_LIST = "reviewList"
 }
 
