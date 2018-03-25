@@ -56,18 +56,6 @@ class ReviewsFragment : BaseFragment(), ReviewsMvpView {
 
             reviews_list.layoutManager = linearLayoutManager
             reviews_list.adapter = reviewsListAdapter
-
-            reviews_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (dy > 0 && add_review.visibility == View.VISIBLE) {
-                        add_review.hide()
-                    } else if (dy < 0 && add_review.visibility != View.VISIBLE) {
-                        add_review.show()
-                    }
-                }
-            })
-
             reviewsListAdapter.addItems(arguments?.getParcelableArrayList<ReviewResult>(AppConstants.REVIEWS_LIST))
         }
     }
