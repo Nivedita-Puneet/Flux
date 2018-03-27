@@ -45,5 +45,6 @@ object AppConstants {
     val GENRE_LIST = "genreList"
     val CAST_LIST = "castList"
     val REVIEWS_LIST = "reviewList"
+    val SEASON_LIST = "seasonsList"
 }
 

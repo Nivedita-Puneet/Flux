@@ -117,4 +117,8 @@ class InfoFragment : BaseFragment(), InfoMvpView {
         return chip
     }
 
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
+    }
 }

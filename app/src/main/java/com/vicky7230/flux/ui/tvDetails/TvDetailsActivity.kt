@@ -12,13 +12,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.vicky7230.flux.R
-import com.vicky7230.flux.data.network.model.tvDetails.Cast
-import com.vicky7230.flux.data.network.model.tvDetails.Genre
-import com.vicky7230.flux.data.network.model.tvDetails.ReviewResult
-import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
+import com.vicky7230.flux.data.network.model.tvDetails.*
 import com.vicky7230.flux.ui.base.BaseActivity
-import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
 import com.vicky7230.flux.ui.tvDetails.info.InfoFragment
+import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
 import com.vicky7230.flux.ui.tvDetails.seasons.SeasonsFragment
 import com.vicky7230.flux.ui.youtubePlayer.YoutubeActivity
 import com.vicky7230.flux.utils.AppConstants
@@ -124,7 +121,10 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
         collapse_toolbar.title = tvDetails?.name
         tv_series_title.text = tvDetails?.name
         year.text = tvDetails?.firstAirDate?.substring(0, 4)
-        runtime.text = "${tvDetails?.episodeRunTime?.get(0).toString()} minutes"
+        runtime.text = if (tvDetails?.episodeRunTime?.size != 0)
+            tvDetails?.episodeRunTime?.get(0).toString() + " minutes"
+        else
+            "Unknown"
         seasons.text = "${tvDetails?.numberOfSeasons.toString()} Seasons"
         rating.rating = ((tvDetails?.voteAverage?.div(10.0f) ?: 0.0f) * 5.0f)
         rating_float.text = tvDetails?.voteAverage.toString()
@@ -132,9 +132,15 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
 
     private fun addDetailFragments(tvDetails: TvDetails?) {
         val fragments = mutableListOf<Fragment>()
+
+        val networkLogo = if (tvDetails?.networks?.size != 0)
+            tvDetails?.networks?.get(0)?.logoPath
+        else
+            ""
+
         fragments.add(
                 InfoFragment.newInstance(
-                        tvDetails?.networks?.get(0)?.logoPath,
+                        networkLogo,
                         tvDetails?.numberOfSeasons,
                         tvDetails?.numberOfEpisodes,
                         tvDetails?.overview,
@@ -142,7 +148,9 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
                         tvDetails?.credits?.cast as ArrayList<Cast>?
                 )
         )
-        fragments.add(SeasonsFragment.newInstance())
+        fragments.add(SeasonsFragment.newInstance(
+                tvDetails?.seasons as ArrayList<Season>?
+        ))
         fragments.add(ReviewsFragment.newInstance(
                 tvDetails?.reviews?.reviewResults as ArrayList<ReviewResult>?
         ))

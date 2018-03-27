@@ -60,4 +60,8 @@ class ReviewsFragment : BaseFragment(), ReviewsMvpView {
         }
     }
 
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
+    }
 }
