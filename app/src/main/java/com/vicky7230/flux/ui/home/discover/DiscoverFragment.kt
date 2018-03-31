@@ -43,8 +43,8 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
         presenter.onAttach(this)
@@ -54,6 +54,7 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
     override fun setUp(view: View) {
 
         genres_list.layoutManager = gridLayoutManager
+        genres_list.setHasFixedSize(true)
         genres_list.addItemDecoration(discoverItemOffsetDecoration)
         genres_list.adapter = discoverAdapter
 

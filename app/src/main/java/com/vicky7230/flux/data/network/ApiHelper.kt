@@ -37,4 +37,5 @@ interface ApiHelper {
 
     fun getTvDetails(tvId: String, apiKey: String): Observable<TvDetails>
 
+    fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results>
 }

@@ -2,6 +2,7 @@ package com.vicky7230.flux.ui.home.tv
 
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
+import com.vicky7230.flux.R
 import com.vicky7230.flux.di.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -22,8 +23,8 @@ class TvModule {
     }
 
     @Provides
-    fun provideItemOffsetDecoration(): ItemOffsetDecoration {
-        return ItemOffsetDecoration(20)
+    fun provideItemOffsetDecoration(@ApplicationContext context: Context): ItemOffsetDecoration {
+        return ItemOffsetDecoration( context.resources.getDimensionPixelOffset(R.dimen.tvImageOffset))
     }
 
     @Provides

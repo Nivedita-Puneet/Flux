@@ -39,7 +39,7 @@ class SeasonsAdapter(private val seasons: MutableList<Season>) : RecyclerView.Ad
             if (season != null) {
                 GlideApp
                         .with(itemView.context)
-                        .load("https://image.tmdb.org/t/p/w780" + season.posterPath)
+                        .load("https://image.tmdb.org/t/p/w342" + season.posterPath)
                         .centerInside()
                         .into(itemView.season_image)
                 itemView.season_number.text = "Season ${season.seasonNumber.toString()}"

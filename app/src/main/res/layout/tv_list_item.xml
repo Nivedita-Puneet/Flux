@@ -19,6 +19,7 @@
             android:id="@+id/tv_image"
             android:layout_width="match_parent"
             android:layout_height="240dp"
+            android:scaleType="fitXY"
             tools:ignore="ContentDescription" />
 
         <android.support.v7.widget.AppCompatTextView

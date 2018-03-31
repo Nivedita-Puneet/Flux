@@ -17,7 +17,7 @@ import com.vicky7230.flux.ui.base.BaseActivity
 import com.vicky7230.flux.ui.tvDetails.info.InfoFragment
 import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
 import com.vicky7230.flux.ui.tvDetails.seasons.SeasonsFragment
-import com.vicky7230.flux.ui.youtubePlayer.YoutubeActivity
+import com.vicky7230.flux.ui.youtube.YoutubeActivity
 import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
 import dagger.android.AndroidInjection

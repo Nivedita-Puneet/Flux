@@ -134,4 +134,8 @@ constructor(
     override fun getTvDetails(tvId: String, apiKey: String): Observable<TvDetails> {
         return appApiHelper.getTvDetails(tvId, apiKey)
     }
+
+    override fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results> {
+        return appApiHelper.getSearchResults(apiKey, query, page)
+    }
 }

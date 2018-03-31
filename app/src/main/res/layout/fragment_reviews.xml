@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grayBackground"
     android:orientation="vertical"
     tools:context="com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment">
 
@@ -15,8 +16,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom">
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="40dp"
@@ -30,10 +31,10 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:hint="Add your review"
-            android:textSize="17sp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:layout_weight="1" />
+            android:hint="Add your review"
+            android:textSize="17sp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="24dp"

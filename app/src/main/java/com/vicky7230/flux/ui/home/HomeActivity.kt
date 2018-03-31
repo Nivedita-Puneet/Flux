@@ -8,10 +8,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
 import com.vicky7230.flux.ui.login.LoginActivity
+import com.vicky7230.flux.ui.search.SearchActivity
 import com.vicky7230.flux.utils.BottomNavigationViewHelper
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -89,9 +89,9 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
             }
 
             override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
             ) {
             }
 
@@ -137,7 +137,7 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.search -> {
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+                startActivity(SearchActivity.getStartIntent(this))
                 true
             }
             else -> super.onOptionsItemSelected(item)

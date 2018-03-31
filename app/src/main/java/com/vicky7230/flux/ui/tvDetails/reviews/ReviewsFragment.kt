@@ -53,7 +53,6 @@ class ReviewsFragment : BaseFragment(), ReviewsMvpView {
 
     override fun setUp(view: View) {
         if (arguments != null) {
-
             reviews_list.layoutManager = linearLayoutManager
             reviews_list.adapter = reviewsListAdapter
             reviewsListAdapter.addItems(arguments?.getParcelableArrayList<ReviewResult>(AppConstants.REVIEWS_LIST))

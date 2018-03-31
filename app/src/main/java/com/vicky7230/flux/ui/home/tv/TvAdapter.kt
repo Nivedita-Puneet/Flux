@@ -129,10 +129,10 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
         fun onBind(result: Result?) {
             GlideApp
                     .with(itemView.context)
-                    .load("https://image.tmdb.org/t/p/w780" + result?.posterPath)
+                    .load("https://image.tmdb.org/t/p/w500" + result?.posterPath)
                     .error(R.drawable.not_found)
                     .transition(withCrossFade())
-                    .centerCrop()
+                    .fitCenter()
                     .into(itemView.tv_image)
 
             itemView.tv_title.text = result?.originalName

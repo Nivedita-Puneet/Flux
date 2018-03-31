@@ -22,10 +22,10 @@ buildscript {
             'archComponents'      : '1.0.0',
             'attributionPresenter': '1.0',
             'htmlTextview'        : '3.5',
-            'guava'               : '24.0-android',
             'circleimageview'     : '2.2.0',
             'materialChipView'    : '1.2.1',
-            'flexbox'             : '0.3.2'
+            'flexbox'             : '0.3.2',
+            'materialsearchview'  : '1.4.0'
     ]
 
     repositories {

@@ -3,7 +3,9 @@ package com.vicky7230.flux.ui.home.discover
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import com.vicky7230.flux.R
 import com.vicky7230.flux.di.ApplicationContext
+import com.vicky7230.flux.ui.home.tv.ItemOffsetDecoration
 import dagger.Module
 import dagger.Provides
 
@@ -23,8 +25,8 @@ class DiscoverModule {
     }
 
     @Provides
-    fun provideDiscoverItemOffsetDecoration(): DiscoverItemOffsetDecoration {
-        return DiscoverItemOffsetDecoration(15)
+    fun provideItemOffsetDecoration(@ApplicationContext context: Context): DiscoverItemOffsetDecoration {
+        return DiscoverItemOffsetDecoration( context.resources.getDimensionPixelOffset(R.dimen.genreImageOffset))
     }
 
     @Provides

@@ -4,4 +4,6 @@
     <dimen name="chipPadding">9dp</dimen>
     <dimen name="chipMargin">4.5dp</dimen>
     <dimen name="chipMarginBig">9dp</dimen>
+    <dimen name="tvImageOffset">10dp</dimen>
+    <dimen name="genreImageOffset">7dp</dimen>
 </resources>

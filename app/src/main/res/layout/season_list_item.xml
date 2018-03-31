@@ -52,7 +52,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="3"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@id/season_image"
         app:layout_constraintRight_toRightOf="parent"

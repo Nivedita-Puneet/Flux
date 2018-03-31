@@ -66,4 +66,11 @@ interface ApiService {
             @Query("api_key") apiKey: String,
             @Query("append_to_response") value: String = "videos,reviews,credits"
     ): Observable<TvDetails>
+
+    @GET("search/tv")
+    fun getSearchResults(
+            @Query("api_key") apiKey: String,
+            @Query("query") query: String,
+            @Query("page") page: String
+    ): Observable<Results>
 }

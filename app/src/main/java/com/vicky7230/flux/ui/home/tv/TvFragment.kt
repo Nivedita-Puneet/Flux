@@ -125,7 +125,7 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
 
         tvtList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+                //super.onScrolled(recyclerView, dx, dy)
                 val visibleItemCount = gridLayoutManager.childCount
                 val totalItemCount = gridLayoutManager.itemCount
                 val pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition()

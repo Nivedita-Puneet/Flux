@@ -15,6 +15,36 @@ import kotlinx.android.synthetic.main.discover_genre_list_item.view.*
 class DiscoverAdapter(private val genres: MutableList<Genre>?) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    val genreMap = hashMapOf<Int, Int>(
+            10759 to R.drawable.action_adevnture,
+            16 to R.drawable.animation,
+            35 to R.drawable.comedy,
+            80 to R.drawable.crime,
+            99 to R.drawable.documentary,
+            18 to R.drawable.drama,
+            10751 to R.drawable.family,
+            10762 to R.drawable.kids,
+            9648 to R.drawable.mystery,
+            10763 to R.drawable.news,
+            10764 to R.drawable.reality,
+            10765 to R.drawable.scifi,
+            10766 to R.drawable.soap,
+            10767 to R.drawable.talk,
+            10768 to R.drawable.war_politics,
+            37 to R.drawable.western,
+            28 to R.drawable.action,
+            12 to R.drawable.adventure,
+            14 to R.drawable.fantasy,
+            36 to R.drawable.history,
+            27 to R.drawable.horror,
+            10402 to R.drawable.music,
+            10749 to R.drawable.romance,
+            878 to R.drawable.science_fiction,
+            10770 to R.drawable.tv_movie,
+            53 to R.drawable.thriller,
+            10752 to R.drawable.war
+    )
+
     fun addItems(genres: MutableList<Genre>?) {
         if (genres != null) {
             this.genres?.addAll(genres)
@@ -59,36 +89,9 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
 
         fun onBind(position: Int) {
             val genre: Genre? = genres?.get(position)
-            itemView.genre_title.text = AppConstants.genres[genre?.id]?.toUpperCase()
-
-            when (genre?.id) {
-                10759 -> itemView.genre_image.setImageResource(R.drawable.action_adevnture)
-                16 -> itemView.genre_image.setImageResource(R.drawable.animation)
-                35 -> itemView.genre_image.setImageResource(R.drawable.comedy)
-                80 -> itemView.genre_image.setImageResource(R.drawable.crime)
-                99 -> itemView.genre_image.setImageResource(R.drawable.documentary)
-                18 -> itemView.genre_image.setImageResource(R.drawable.drama)
-                10751 -> itemView.genre_image.setImageResource(R.drawable.family)
-                10762 -> itemView.genre_image.setImageResource(R.drawable.kids)
-                9648 -> itemView.genre_image.setImageResource(R.drawable.mystery)
-                10763 -> itemView.genre_image.setImageResource(R.drawable.news)
-                10764 -> itemView.genre_image.setImageResource(R.drawable.reality)
-                10765 -> itemView.genre_image.setImageResource(R.drawable.scifi)
-                10766 -> itemView.genre_image.setImageResource(R.drawable.soap)
-                10767 -> itemView.genre_image.setImageResource(R.drawable.talk)
-                10768 -> itemView.genre_image.setImageResource(R.drawable.war_politics)
-                37 -> itemView.genre_image.setImageResource(R.drawable.western)
-                28 -> itemView.genre_image.setImageResource(R.drawable.action)
-                12 -> itemView.genre_image.setImageResource(R.drawable.adventure)
-                14 -> itemView.genre_image.setImageResource(R.drawable.fantasy)
-                36 -> itemView.genre_image.setImageResource(R.drawable.history)
-                27 -> itemView.genre_image.setImageResource(R.drawable.horror)
-                10402 -> itemView.genre_image.setImageResource(R.drawable.music)
-                10749 -> itemView.genre_image.setImageResource(R.drawable.romance)
-                878 -> itemView.genre_image.setImageResource(R.drawable.science_fiction)
-                10770 -> itemView.genre_image.setImageResource(R.drawable.tv_movie)
-                53 -> itemView.genre_image.setImageResource(R.drawable.thriller)
-                10752 -> itemView.genre_image.setImageResource(R.drawable.war)
+            if (genre != null) {
+                itemView.genre_title.text = AppConstants.genres[genre.id]?.toUpperCase()
+                genreMap[genre.id ?: 0]?.let { itemView.genre_image.setImageResource(it) }
             }
         }
     }

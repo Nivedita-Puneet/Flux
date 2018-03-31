@@ -15,6 +15,7 @@ import javax.inject.Inject
  * Created by vicky on 31/12/17.
  */
 class AppApiHelper @Inject constructor(private val apiService: ApiService) : ApiHelper {
+
     override fun getConfigurations(apiKey: String): Observable<Configuration> {
         return apiService.getConfigurations(apiKey)
     }
@@ -53,4 +54,7 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
         return apiService.getTvDetails(tvId, apiKey)
     }
 
+    override fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results> {
+        return apiService.getSearchResults(apiKey, query, page)
+    }
 }

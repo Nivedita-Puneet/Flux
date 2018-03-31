@@ -7,6 +7,8 @@ import com.vicky7230.flux.ui.home.HomeActivity
 import com.vicky7230.flux.ui.home.HomeActivityModule
 import com.vicky7230.flux.ui.login.LoginActivity
 import com.vicky7230.flux.ui.login.LoginActivityModule
+import com.vicky7230.flux.ui.search.SearchActivity
+import com.vicky7230.flux.ui.search.SearchActivityModule
 import com.vicky7230.flux.ui.splash.SplashActivity
 import com.vicky7230.flux.ui.splash.SplashActivityModule
 import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
@@ -36,5 +38,8 @@ abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector(modules = [(TvDetailsActivityModule::class), (TvDetailsFragmentProvider::class)])
     abstract fun bindTvDetailsActivity(): TvDetailsActivity
+
+    @ContributesAndroidInjector(modules = [(SearchActivityModule::class)])
+    abstract fun bindSearchActivity(): SearchActivity
 
 }

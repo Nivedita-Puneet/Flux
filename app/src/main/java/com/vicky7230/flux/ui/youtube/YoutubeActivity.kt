@@ -1,4 +1,4 @@
-package com.vicky7230.flux.ui.youtubePlayer
+package com.vicky7230.flux.ui.youtube
 
 import android.content.Context
 import android.content.Intent
