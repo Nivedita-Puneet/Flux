@@ -45,6 +45,9 @@ class SearchActivity : BaseActivity(), SearchMvpView, TvSearchAdapter.Callback {
 
     private fun init() {
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         RxView.clicks(back_button).subscribe({
             finish()
         })

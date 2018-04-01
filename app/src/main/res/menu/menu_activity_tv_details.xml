@@ -3,12 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/add_to_favourites"
-        android:title="Favourite"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/add_to_watchlist"
-        android:title="WatchList"
-        app:showAsAction="never" />
+        android:id="@+id/action_more"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/add_to_favourites"
+                android:icon="@drawable/ic_favorite_border_24dp"
+                android:title="Favourite"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/add_to_watchlist"
+                android:icon="@drawable/ic_playlist_add_black_24dp"
+                android:title="Watchlist"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+
 
 </menu>

@@ -14,6 +14,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.tvDetails.*
 import com.vicky7230.flux.ui.base.BaseActivity
+import com.vicky7230.flux.ui.home.LoginSuccessfulEvent
+import com.vicky7230.flux.ui.login.LoginActivity
 import com.vicky7230.flux.ui.tvDetails.info.InfoFragment
 import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
 import com.vicky7230.flux.ui.tvDetails.seasons.SeasonsFragment
@@ -25,6 +27,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_tv_details.*
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 
@@ -36,6 +39,8 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
     lateinit var presenter: TvDetailsMvpPresenter<TvDetailsMvpView>
     @Inject
     lateinit var tvDetailsPagerAdapter: DetailsPagerAdapter
+
+    private val LOGIN_REQUEST: Int = 802
 
     companion object {
         fun getStartIntent(context: Context, tvId: String): Intent {
@@ -159,6 +164,18 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
         tvDetailsPagerAdapter.addItems(fragments)
     }
 
+    override fun showLoginScreen() {
+        startActivityForResult(LoginActivity.getStartIntent(this), LOGIN_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == LOGIN_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                EventBus.getDefault().postSticky(LoginSuccessfulEvent())
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_tv_details, menu)
         return true
@@ -170,9 +187,22 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
                 finish()
                 true
             }
+            R.id.add_to_favourites -> {
+                if (intent != null && intent.getStringExtra(AppConstants.TV_ID) != null) {
+                    presenter.addToFavourites(intent.getStringExtra(AppConstants.TV_ID))
+                }
+                true
+            }
+            R.id.add_to_watchlist -> {
+                if (intent != null && intent.getStringExtra(AppConstants.TV_ID) != null) {
+                    presenter.addToWatchList(intent.getStringExtra(AppConstants.TV_ID))
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentDispatchingAndroidInjector

@@ -12,6 +12,7 @@ import com.vicky7230.flux.R
 import com.vicky7230.flux.ui.base.BaseActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), LoginMvpView {
@@ -21,7 +22,6 @@ class LoginActivity : BaseActivity(), LoginMvpView {
     var requestToken: String? = null
 
     companion object {
-
         fun getStartIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 

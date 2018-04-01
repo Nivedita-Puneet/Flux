@@ -9,5 +9,6 @@ import com.vicky7230.flux.ui.base.MvpView
  */
 interface TvDetailsMvpView : MvpView {
     fun showDetails(tvDetails: TvDetails?)
+    fun showLoginScreen()
 
 }

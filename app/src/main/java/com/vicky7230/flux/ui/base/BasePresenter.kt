@@ -10,8 +10,8 @@ import javax.inject.Inject
  * Created by vicky on 11/2/18.
  */
 open class BasePresenter<V : MvpView> @Inject constructor(
-    private val dataManager: DataManager,
-    private val compositeDisposable: CompositeDisposable
+        private val dataManager: DataManager,
+        private val compositeDisposable: CompositeDisposable
 ) : MvpPresenter<V> {
 
     var mvpView: V? = null
@@ -34,14 +34,13 @@ open class BasePresenter<V : MvpView> @Inject constructor(
     }
 
     class MvpViewNotAttachedException :
-        RuntimeException("Please call Presenter.onAttach(MvpView) before" + " requesting data to the Presenter")
+            RuntimeException("Please call Presenter.onAttach(MvpView) before" + " requesting data to the Presenter")
 
     fun handleApiError(throwable: Throwable) {
         if (throwable is HttpException) {
             when (throwable.code()) {
                 401 -> {
                     mvpView?.showError("sessionId expired or invalid.")
-
                     //TODO
                     // log out the user and clear his data
                 }

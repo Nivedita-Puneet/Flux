@@ -2,6 +2,7 @@ package com.vicky7230.flux.ui.tvDetails
 
 import com.vicky7230.flux.data.Config
 import com.vicky7230.flux.data.DataManager
+import com.vicky7230.flux.data.network.Favourite
 import com.vicky7230.flux.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -43,4 +44,45 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
                         })
         )
     }
+
+    override fun addToFavourites(tvId: String) {
+        if (dataManager.getIsUserLoggedIn()) {
+
+            val favourite = Favourite(mediaId = tvId.toInt())
+
+            mvpView?.showLoading()
+            compositeDisposable.add(
+                    dataManager.setFavourite(
+                            dataManager.getAccountId() ?: 0,
+                            Config.API_KEY,
+                            dataManager.getSessionIdFromPreference() ?: "",
+                            favourite)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ setFavourite ->
+                                if (!isViewAttached())
+                                    return@subscribe
+                                mvpView?.hideLoading()
+                                if (setFavourite != null) {
+                                    mvpView?.showMessage(setFavourite.statusMessage ?: "")
+                                }
+                            }, { throwable ->
+                                if (!isViewAttached())
+                                    return@subscribe
+                                mvpView?.hideLoading()
+                                handleApiError(throwable)
+                                Timber.i(throwable)
+                            })
+            )
+        } else
+            mvpView?.showLoginScreen()
+    }
+
+    override fun addToWatchList(tvId: String) {
+        if (dataManager.getIsUserLoggedIn())
+            ;
+        else
+            mvpView?.showLoginScreen()
+    }
+
 }

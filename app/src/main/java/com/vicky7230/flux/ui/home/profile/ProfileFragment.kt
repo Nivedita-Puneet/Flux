@@ -58,9 +58,8 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun onLoginSuccessfulEvent(event: LoginSuccessfulEvent) {
-        //showMessage("Got Event.")
+        showMessage("Got Event.")
         presenter.getAccountDetails()
-        EventBus.getDefault().removeAllStickyEvents()
     }
 
     override fun onStart() {

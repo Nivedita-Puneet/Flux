@@ -6,12 +6,10 @@ import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
-import com.vicky7230.flux.data.network.model.tvDetails.Videos
+import com.vicky7230.flux.data.network.model.setFavourite.SetFavourite
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 /**
@@ -73,4 +71,13 @@ interface ApiService {
             @Query("query") query: String,
             @Query("page") page: String
     ): Observable<Results>
+
+    @POST("account/{account_id}/favorite")
+    fun setFavourite(
+            @Path("account_id") accountId: Int,
+            @Query("api_key") apiKey: String,
+            @Query("session_id") sessionId: String,
+            @Body favourite: Favourite
+    ): Observable<SetFavourite>
+
 }

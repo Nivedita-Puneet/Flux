@@ -3,12 +3,14 @@ package com.vicky7230.flux.data
 import com.vicky7230.flux.data.db.AppDbHelper
 import com.vicky7230.flux.data.db.room.model.ConfigurationDbModel
 import com.vicky7230.flux.data.network.AppApiHelper
+import com.vicky7230.flux.data.network.Favourite
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
+import com.vicky7230.flux.data.network.model.setFavourite.SetFavourite
 import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
 import com.vicky7230.flux.data.prefs.AppPreferencesHelper
@@ -137,5 +139,9 @@ constructor(
 
     override fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results> {
         return appApiHelper.getSearchResults(apiKey, query, page)
+    }
+
+    override fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite> {
+        return appApiHelper.setFavourite(accountId, apiKey, sessionId, favourite)
     }
 }
