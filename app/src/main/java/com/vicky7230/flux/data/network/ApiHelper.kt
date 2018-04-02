@@ -1,14 +1,16 @@
 package com.vicky7230.flux.data.network
 
+import com.vicky7230.flux.data.network.addToWatchlist.AddToWatchlist
+import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
 import com.vicky7230.flux.data.network.model.genres.Genres
-import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.network.model.setFavourite.SetFavourite
-import com.vicky7230.flux.data.network.model.tvDetails.Videos
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
+import com.vicky7230.flux.ui.tvDetails.Favourite
+import com.vicky7230.flux.ui.tvDetails.Watchlist
 import io.reactivex.Observable
 
 /**
@@ -41,4 +43,6 @@ interface ApiHelper {
     fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results>
 
     fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite>
+
+    fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist>
 }

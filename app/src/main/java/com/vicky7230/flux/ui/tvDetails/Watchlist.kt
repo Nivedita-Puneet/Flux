@@ -1,9 +1,9 @@
-package com.vicky7230.flux.data.network
+package com.vicky7230.flux.ui.tvDetails
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Favourite(
+data class Watchlist(
 
         @SerializedName("media_type")
         @Expose
@@ -11,8 +11,8 @@ data class Favourite(
         @SerializedName("media_id")
         @Expose
         var mediaId: Int? = null,
-        @SerializedName("favorite")
+        @SerializedName("watchlist")
         @Expose
-        var favorite: Boolean? = true
+        var watchlist: Boolean? = true
 
 )

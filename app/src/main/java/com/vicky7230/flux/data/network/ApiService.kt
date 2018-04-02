@@ -1,5 +1,6 @@
 package com.vicky7230.flux.data.network
 
+import com.vicky7230.flux.data.network.addToWatchlist.AddToWatchlist
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
@@ -8,6 +9,8 @@ import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.network.model.setFavourite.SetFavourite
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
+import com.vicky7230.flux.ui.tvDetails.Favourite
+import com.vicky7230.flux.ui.tvDetails.Watchlist
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -80,4 +83,11 @@ interface ApiService {
             @Body favourite: Favourite
     ): Observable<SetFavourite>
 
+    @POST("account/{account_id}/watchlist")
+    fun addToWatchlist(
+            @Path("account_id") accountId: Int,
+            @Query("api_key") apiKey: String,
+            @Query("session_id") sessionId: String,
+            @Body watchlist: Watchlist
+    ): Observable<AddToWatchlist>
 }

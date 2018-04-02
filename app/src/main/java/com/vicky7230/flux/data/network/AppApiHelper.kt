@@ -1,5 +1,6 @@
 package com.vicky7230.flux.data.network
 
+import com.vicky7230.flux.data.network.addToWatchlist.AddToWatchlist
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.authentication.AuthenticationToken
 import com.vicky7230.flux.data.network.model.configuration.Configuration
@@ -8,6 +9,8 @@ import com.vicky7230.flux.data.network.model.results.Results
 import com.vicky7230.flux.data.network.model.session.Session
 import com.vicky7230.flux.data.network.model.setFavourite.SetFavourite
 import com.vicky7230.flux.data.network.model.tvDetails.TvDetails
+import com.vicky7230.flux.ui.tvDetails.Favourite
+import com.vicky7230.flux.ui.tvDetails.Watchlist
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -60,5 +63,9 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
 
     override fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite> {
         return apiService.setFavourite(accountId, apiKey, sessionId, favourite)
+    }
+
+    override fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist> {
+        return apiService.addToWatchlist(accountId, apiKey, sessionId, watchlist)
     }
 }

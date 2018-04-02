@@ -2,7 +2,7 @@ package com.vicky7230.flux.ui.tvDetails
 
 import com.vicky7230.flux.data.Config
 import com.vicky7230.flux.data.DataManager
-import com.vicky7230.flux.data.network.Favourite
+import com.vicky7230.flux.data.network.addToWatchlist.AddToWatchlist
 import com.vicky7230.flux.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -47,9 +47,7 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
 
     override fun addToFavourites(tvId: String) {
         if (dataManager.getIsUserLoggedIn()) {
-
             val favourite = Favourite(mediaId = tvId.toInt())
-
             mvpView?.showLoading()
             compositeDisposable.add(
                     dataManager.setFavourite(
@@ -79,9 +77,33 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
     }
 
     override fun addToWatchList(tvId: String) {
-        if (dataManager.getIsUserLoggedIn())
-            ;
-        else
+        if (dataManager.getIsUserLoggedIn()) {
+            val watchlist = Watchlist(mediaId = tvId.toInt())
+            mvpView?.showLoading()
+            compositeDisposable.add(
+                    dataManager.addToWatchlist(
+                            dataManager.getAccountId() ?: 0,
+                            Config.API_KEY,
+                            dataManager.getSessionIdFromPreference() ?: "",
+                            watchlist)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ addToWatchlist ->
+                                if (!isViewAttached())
+                                    return@subscribe
+                                mvpView?.hideLoading()
+                                if (addToWatchlist != null) {
+                                    mvpView?.showMessage(addToWatchlist.statusMessage ?: "")
+                                }
+                            }, { throwable ->
+                                if (!isViewAttached())
+                                    return@subscribe
+                                mvpView?.hideLoading()
+                                handleApiError(throwable)
+                                Timber.i(throwable)
+                            })
+            )
+        } else
             mvpView?.showLoginScreen()
     }
 

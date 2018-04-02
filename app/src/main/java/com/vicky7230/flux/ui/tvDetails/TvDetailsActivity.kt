@@ -203,7 +203,6 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
         }
     }
 
-
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentDispatchingAndroidInjector
     }

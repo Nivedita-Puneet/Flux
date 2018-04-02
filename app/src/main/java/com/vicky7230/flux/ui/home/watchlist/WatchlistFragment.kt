@@ -1,4 +1,4 @@
-package com.vicky7230.flux.ui.home.playlist
+package com.vicky7230.flux.ui.home.watchlist
 
 
 import android.os.Bundle
@@ -13,10 +13,10 @@ import com.vicky7230.flux.R
 /**
  * A simple [Fragment] subclass.
  */
-class PlaylistFragment : Fragment() {
+class WatchlistFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PlaylistFragment()
+        fun newInstance() = WatchlistFragment()
     }
 
     override fun onCreateView(
