@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.vicky7230.flux.ui.home.discover.DiscoverFragment
-import com.vicky7230.flux.ui.home.watchlist.WatchlistFragment
+import com.vicky7230.flux.ui.home.watchlist.WatchListFragment
 import com.vicky7230.flux.ui.home.profile.ProfileFragment
 import com.vicky7230.flux.ui.home.tv.TvFragment
 
@@ -17,7 +17,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
         return when (position) {
             0 -> TvFragment.newInstance()
             1 -> DiscoverFragment.newInstance()
-            2 -> WatchlistFragment.newInstance()
+            2 -> WatchListFragment.newInstance()
             3 -> ProfileFragment.newInstance()
             else -> null
         }

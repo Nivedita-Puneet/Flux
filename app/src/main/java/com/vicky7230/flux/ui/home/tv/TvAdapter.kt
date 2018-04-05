@@ -130,7 +130,6 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
             GlideApp
                     .with(itemView.context)
                     .load("https://image.tmdb.org/t/p/w500" + result?.posterPath)
-                    .error(R.drawable.not_found)
                     .transition(withCrossFade())
                     .fitCenter()
                     .into(itemView.tv_image)

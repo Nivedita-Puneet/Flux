@@ -1,6 +1,5 @@
-package com.vicky7230.flux.ui.search
+package com.vicky7230.flux.ui.home.watchlist
 
-import android.annotation.SuppressLint
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,16 +9,15 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.home.ResultDiffUtilCallback
+import com.vicky7230.flux.utils.AppConstants
 import com.vicky7230.flux.utils.GlideApp
-import kotlinx.android.synthetic.main.search_list_item.view.*
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlinx.android.synthetic.main.tv_list_item.view.*
 
 
 /**
  * Created by vicky on 27/2/18.
  */
-class TvSearchAdapter(private val resultList: MutableList<Result>?) :
+class WatchListAdapter(private val resultList: MutableList<Result>?) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_LOADING = -1
@@ -82,13 +80,13 @@ class TvSearchAdapter(private val resultList: MutableList<Result>?) :
 
         val resultViewHolder = ResultViewHolder(
                 LayoutInflater.from(parent?.context).inflate(
-                        R.layout.search_list_item,
+                        R.layout.watch_list_item,
                         parent,
                         false
                 )
         )
 
-        resultViewHolder.itemView.setOnClickListener({
+        resultViewHolder.itemView.tv_image_card.setOnClickListener({
             val result = getItem(resultViewHolder.adapterPosition)
             if (result != null) {
                 callback?.onTvShowClick(result.id ?: 0)
@@ -128,26 +126,21 @@ class TvSearchAdapter(private val resultList: MutableList<Result>?) :
     }
 
     class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("SetTextI18n")
         fun onBind(result: Result?) {
             GlideApp
                     .with(itemView.context)
-                    .load("https://image.tmdb.org/t/p/w342" + result?.posterPath)
+                    .load("https://image.tmdb.org/t/p/w500" + result?.posterPath)
                     .transition(withCrossFade())
                     .fitCenter()
-                    .into(itemView.search_tv_image)
+                    .into(itemView.tv_image)
 
-            itemView.search_tv_name.text = result?.originalName
+            itemView.tv_title.text = result?.originalName
 
-            val sdf = SimpleDateFormat("yyyy-dd-MM", Locale.getDefault())
-            val sdf2 = SimpleDateFormat("dd MMM yy", Locale.getDefault())
-            itemView.search_date_and_rating.text = "" +
-                    "${
-                    if (result?.firstAirDate != null && result.firstAirDate?.isNotEmpty()!!)
-                        sdf2.format(sdf.parse(result.firstAirDate))
-                    else "Unknown"
-                    }    ${result?.voteAverage}/10"
-            itemView.search_tv_overview.text = result?.overview
+            var genres = ""
+            result?.genreIds?.forEach { t -> genres = genres.plus(AppConstants.genres[t] + ", ") }
+            itemView.tv_genres.text = genres.dropLast(2)
+
+            itemView.rating_circle.text = result?.voteAverage.toString()
         }
     }
 

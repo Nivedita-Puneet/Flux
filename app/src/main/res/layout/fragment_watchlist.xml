@@ -1,23 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/whiteBackground"
     android:layout_height="match_parent"
-    tools:context="com.vicky7230.flux.ui.home.discover.DiscoverFragment">
+    tools:context="com.vicky7230.flux.ui.home.watchlist.WatchListFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/genres_list"
+        android:id="@+id/watch_list"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:listitem="@layout/discover_genre_list_item" />
+        tools:listitem="@layout/tv_list_item" />
 
     <ProgressBar
-        android:id="@+id/progress"
+        android:id="@+id/watchlist_progress"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:theme="@style/AppTheme.OrangeAccent"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:theme="@style/AppTheme.OrangeAccent" />
 
 </FrameLayout>

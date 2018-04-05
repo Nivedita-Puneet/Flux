@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.discover_genre_list_item.view.*
  */
 class DiscoverAdapter(private val genres: MutableList<Genre>?) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    val genreMap = hashMapOf<Int, Int>(
+    /*val genreMap = hashMapOf<Int, Int>(
             10759 to R.drawable.action_adevnture,
             16 to R.drawable.animation,
             35 to R.drawable.comedy,
@@ -43,7 +42,7 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
             10770 to R.drawable.tv_movie,
             53 to R.drawable.thriller,
             10752 to R.drawable.war
-    )
+    )*/
 
     fun addItems(genres: MutableList<Genre>?) {
         if (genres != null) {
@@ -91,7 +90,9 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
             val genre: Genre? = genres?.get(position)
             if (genre != null) {
                 itemView.genre_title.text = AppConstants.genres[genre.id]?.toUpperCase()
-                genreMap[genre.id ?: 0]?.let { itemView.genre_image.setImageResource(it) }
+                //genreMap[genre.id ?: 0]?.let { itemView.genre_image.setImageResource(it) }
+                val colors = itemView.genre_card.context.resources.getIntArray(R.array.shades_of_gray)
+                itemView.genre_card.setBackgroundColor(colors[position % 4])
             }
         }
     }

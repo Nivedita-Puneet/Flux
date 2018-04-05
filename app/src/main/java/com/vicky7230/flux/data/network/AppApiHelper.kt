@@ -68,4 +68,9 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
     override fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist> {
         return apiService.addToWatchlist(accountId, apiKey, sessionId, watchlist)
     }
+
+    override fun getWatchList(accountId: Int, apiKey: String, sessionId: String, page: String): Observable<Results> {
+        return apiService.getWatchList(accountId, apiKey, sessionId, page)
+    }
+
 }

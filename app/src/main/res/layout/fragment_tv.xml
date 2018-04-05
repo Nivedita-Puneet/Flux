@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grayBackground"
+    android:background="@color/whiteBackground"
     tools:context="com.vicky7230.flux.ui.home.tv.TvFragment">
 
     <android.support.v7.widget.RecyclerView

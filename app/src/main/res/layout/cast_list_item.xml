@@ -12,8 +12,7 @@
         android:layout_height="60dp"
         android:layout_gravity="left"
         app:civ_border_color="@android:color/darker_gray"
-        app:civ_border_width="1dp"
-        tools:src="@drawable/action" />
+        app:civ_border_width="1dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cast_name"

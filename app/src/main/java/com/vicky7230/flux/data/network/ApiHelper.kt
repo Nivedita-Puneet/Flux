@@ -45,4 +45,6 @@ interface ApiHelper {
     fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite>
 
     fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist>
+
+    fun getWatchList(accountId: Int, apiKey: String, sessionId: String, page: String): Observable<Results>
 }

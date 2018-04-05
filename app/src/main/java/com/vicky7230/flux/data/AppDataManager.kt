@@ -149,4 +149,9 @@ constructor(
     override fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist> {
         return appApiHelper.addToWatchlist(accountId, apiKey, sessionId, watchlist)
     }
+
+    override fun getWatchList(accountId: Int, apiKey: String, sessionId: String, page: String): Observable<Results> {
+        return appApiHelper.getWatchList(accountId, apiKey, sessionId, page)
+    }
+
 }

@@ -6,6 +6,8 @@ import com.vicky7230.flux.ui.home.profile.ProfileFragment
 import com.vicky7230.flux.ui.home.profile.ProfileModule
 import com.vicky7230.flux.ui.home.tv.TvFragment
 import com.vicky7230.flux.ui.home.tv.TvModule
+import com.vicky7230.flux.ui.home.watchlist.WatchListFragment
+import com.vicky7230.flux.ui.home.watchlist.WatchListModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -21,6 +23,9 @@ abstract class FragmentProvider {
 
     @ContributesAndroidInjector(modules = [(DiscoverModule::class)])
     internal abstract fun provideDiscoverFragmentFactory(): DiscoverFragment
+
+    @ContributesAndroidInjector(modules = [(WatchListModule::class)])
+    internal abstract fun provideWatchListFragmentFactory(): WatchListFragment
 
     @ContributesAndroidInjector(modules = [(ProfileModule::class)])
     internal abstract fun provideProfileFragmentFactory(): ProfileFragment

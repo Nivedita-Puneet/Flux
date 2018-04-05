@@ -90,4 +90,12 @@ interface ApiService {
             @Query("session_id") sessionId: String,
             @Body watchlist: Watchlist
     ): Observable<AddToWatchlist>
+
+    @GET("account/{account_id}/watchlist/tv")
+    fun getWatchList(
+            @Path("account_id") accountId: Int,
+            @Query("api_key") apiKey: String,
+            @Query("session_id") sessionId: String,
+            @Query("page") page: String
+    ): Observable<Results>
 }

@@ -26,7 +26,7 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
 
     private val LOGIN_REQUEST: Int = 802
 
-    val PLAYLIST = "playlist"
+    val WATCHLIST = "watchlist"
     val PROFILE = "profile"
 
     @Inject
@@ -71,8 +71,8 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
                     viewPager.setCurrentItem(1, true)
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.playlist -> {
-                    presenter.checkIfUserLoggedIn(PLAYLIST)
+                R.id.watchlist -> {
+                    presenter.checkIfUserLoggedIn(WATCHLIST)
                     //return@setOnNavigationItemSelectedListener true
                 }
                 R.id.profile -> {
@@ -106,7 +106,7 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
 
     override fun changeFragment(fragment: String) {
         when (fragment) {
-            PLAYLIST -> {
+            WATCHLIST -> {
                 viewPager.setCurrentItem(2, true)
                 bottomNavigationView.menu.getItem(2).isChecked = true
             }
