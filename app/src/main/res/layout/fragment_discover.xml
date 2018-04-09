@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/whiteBackground"
     android:layout_height="match_parent"
+    android:background="@color/whiteBackground"
     tools:context="com.vicky7230.flux.ui.home.discover.DiscoverFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -17,6 +17,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:theme="@style/AppTheme.OrangeAccent"
         android:visibility="visible" />
 

@@ -13,16 +13,21 @@ import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import com.jakewharton.rxbinding2.view.RxView
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.base.BaseFragment
+import com.vicky7230.flux.ui.home.HomeActivity
+import com.vicky7230.flux.ui.home.discover.DiscoverGenreEvent
+import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_tv.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
-import android.widget.AdapterView.OnItemSelectedListener
-import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
 
 
 /**
@@ -42,6 +47,7 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
     var isLoading = false
     var sortBy = "popularity.desc"
     var ratingMoreThan = 0
+    var discoverGenreId: String? = null
 
     private val sortByList = listOf(
             "Popularity",
@@ -95,9 +101,10 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
         RxView.clicks(dialogView.findViewById(R.id.apply_button)).subscribe({
             progress.visibility = VISIBLE
             tvtList.visibility = GONE
+            gridLayoutManager.scrollToPositionWithOffset(0, 0)
             tvAdapter.clearItems()
             presenter.resetPageVariable()
-            presenter.getTvs(sortBy, ratingMoreThan)
+            presenter.getTvs(sortBy, ratingMoreThan, discoverGenreId)
             dialog?.dismiss()
         })
 
@@ -136,13 +143,25 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
                                     type = "LOADING"
                             )
                     )
-                    presenter.getTvs(sortBy, ratingMoreThan)
+                    presenter.getTvs(sortBy, ratingMoreThan, discoverGenreId)
                     isLoading = true
                 }
             }
         })
 
-        presenter.getTvs(sortBy, ratingMoreThan)
+        RxView.clicks(discover_genre_clear_button).subscribe({
+            discover_genre_view.visibility = GONE
+            discoverGenreId = null
+
+            progress.visibility = VISIBLE
+            tvtList.visibility = GONE
+            gridLayoutManager.scrollToPositionWithOffset(0, 0)
+            tvAdapter.clearItems()
+            presenter.resetPageVariable()
+            presenter.getTvs(sortBy, ratingMoreThan, discoverGenreId)
+        })
+
+        presenter.getTvs(sortBy, ratingMoreThan, discoverGenreId)
     }
 
     private fun setUpSortBySpinner(dialogView: View) {
@@ -220,6 +239,38 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    fun onDiscoverEvent(discoverGenreEvent: DiscoverGenreEvent) {
+        val discoverGenre = EventBus.getDefault().getStickyEvent(DiscoverGenreEvent::class.java)
+        if (discoverGenre != null) {
+            showMessage("Got Discover Event.")
+            EventBus.getDefault().removeStickyEvent(discoverGenre)
+
+            (getBaseActivity() as HomeActivity).goToTvFragment()
+
+            discover_genre_view.visibility = VISIBLE
+            discover_genre_name.text = discoverGenreEvent.name
+            discoverGenreId = discoverGenreEvent.id.toString()
+
+            progress.visibility = VISIBLE
+            tvtList.visibility = GONE
+            gridLayoutManager.scrollToPositionWithOffset(0, 0)
+            tvAdapter.clearItems()
+            presenter.resetPageVariable()
+            presenter.getTvs(sortBy, ratingMoreThan, discoverGenreId)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onDestroyView() {

@@ -14,8 +14,9 @@ import android.view.ViewGroup
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.base.BaseFragment
-import com.vicky7230.flux.ui.home.LoginSuccessfulEvent
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
 import com.vicky7230.flux.ui.home.tv.ItemOffsetDecoration
+import com.vicky7230.flux.ui.tvDetails.TvDetailsActivity
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_watchlist.*
 import org.greenrobot.eventbus.EventBus
@@ -27,7 +28,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class WatchListFragment : BaseFragment(), WatchListMvpView {
+class WatchListFragment : BaseFragment(), WatchListMvpView, WatchListAdapter.Callback {
 
     @Inject
     lateinit var presenter: WatchListMvpPresenter<WatchListMvpView>
@@ -55,6 +56,7 @@ class WatchListFragment : BaseFragment(), WatchListMvpView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_watchlist, container, false)
         presenter.onAttach(this)
+        watchListAdapter.setCallback(this)
         return view
     }
 
@@ -108,15 +110,22 @@ class WatchListFragment : BaseFragment(), WatchListMvpView {
         }
     }
 
+    override fun onTvShowClick(id: Int) {
+        startActivity(TvDetailsActivity.getStartIntent(activity as Context, id.toString()))
+    }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    fun onLoginSuccessfulEvent(event: LoginSuccessfulEvent) {
-        showMessage("Got Event.")
-        watchlist_progress.visibility = VISIBLE
-        watch_list.visibility = GONE
-        watchListAdapter.clearItems()
-        presenter.resetPageVariable()
-        presenter.getWatchList()
+    fun onLoginSuccessfulEvent(eventGetWatchlist: LoginSuccessfulEventGetWatchlist) {
+        val loginSuccessfulEventGetWatchlist = EventBus.getDefault().getStickyEvent(LoginSuccessfulEventGetWatchlist::class.java)
+        if (loginSuccessfulEventGetWatchlist != null) {
+            showMessage("Got Watchlist Event.")
+            EventBus.getDefault().removeStickyEvent(loginSuccessfulEventGetWatchlist)
+            watchlist_progress.visibility = VISIBLE
+            watch_list.visibility = GONE
+            watchListAdapter.clearItems()
+            presenter.resetPageVariable()
+            presenter.getWatchList()
+        }
     }
 
     override fun onStart() {

@@ -29,7 +29,7 @@ class WatchListAdapter(private val resultList: MutableList<Result>?) :
 
     private var callback: Callback? = null
 
-    fun setCallback(callback: Callback) {
+    fun setCallback(callback: WatchListFragment) {
         this.callback = callback
     }
 

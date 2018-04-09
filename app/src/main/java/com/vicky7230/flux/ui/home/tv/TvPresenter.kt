@@ -13,8 +13,8 @@ import javax.inject.Inject
  * Created by vicky on 27/2/18.
  */
 class TvPresenter<V : TvMvpView> @Inject constructor(
-    private val dataManager: DataManager,
-    private val compositeDisposable: CompositeDisposable
+        private val dataManager: DataManager,
+        private val compositeDisposable: CompositeDisposable
 ) : BasePresenter<V>(dataManager, compositeDisposable), TvMvpPresenter<V> {
 
     private var page = 1
@@ -23,32 +23,35 @@ class TvPresenter<V : TvMvpView> @Inject constructor(
         page = 1
     }
 
-    override fun getTvs(sortBy: String, ratingMoreThan: Int) {
+    override fun getTvs(sortBy: String, ratingMoreThan: Int, discoverGenreId: String?) {
+
+        val genres = discoverGenreId ?: dataManager.getUserGenres()
+
         compositeDisposable.add(
-            dataManager.getTvByGenres(
-                Config.API_KEY,
-                dataManager.getUserGenres() ?: "",
-                page.toString(),
-                sortBy,
-                ratingMoreThan.toString()
-            )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
-                    if (!isViewAttached())
-                        return@subscribe
-                    //mvpView?.hideLoading()
-                    if (results.results != null) {
-                        mvpView?.updateTvList(results.results!!)
-                        ++page
-                    }
-                }, { throwable ->
-                    if (!isViewAttached())
-                        return@subscribe
-                    //mvpView?.hideLoading()
-                    mvpView?.showMessage(throwable.message!!)
-                    Timber.e(throwable.message)
-                })
+                dataManager.getTvByGenres(
+                        Config.API_KEY,
+                        genres ?: "",
+                        page.toString(),
+                        sortBy,
+                        ratingMoreThan.toString()
+                )
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ results ->
+                            if (!isViewAttached())
+                                return@subscribe
+                            //mvpView?.hideLoading()
+                            if (results.results != null) {
+                                mvpView?.updateTvList(results.results!!)
+                                ++page
+                            }
+                        }, { throwable ->
+                            if (!isViewAttached())
+                                return@subscribe
+                            //mvpView?.hideLoading()
+                            mvpView?.showMessage(throwable.message!!)
+                            Timber.e(throwable.message)
+                        })
         )
     }
 }

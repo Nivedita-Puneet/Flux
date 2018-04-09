@@ -14,7 +14,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.tvDetails.*
 import com.vicky7230.flux.ui.base.BaseActivity
-import com.vicky7230.flux.ui.home.LoginSuccessfulEvent
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetProfile
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
 import com.vicky7230.flux.ui.login.LoginActivity
 import com.vicky7230.flux.ui.tvDetails.info.InfoFragment
 import com.vicky7230.flux.ui.tvDetails.reviews.ReviewsFragment
@@ -171,7 +172,8 @@ class TvDetailsActivity : BaseActivity(), TvDetailsMvpView, HasSupportFragmentIn
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK) {
-                EventBus.getDefault().postSticky(LoginSuccessfulEvent())
+                EventBus.getDefault().postSticky(LoginSuccessfulEventGetWatchlist())
+                EventBus.getDefault().postSticky(LoginSuccessfulEventGetProfile())
             }
         }
     }

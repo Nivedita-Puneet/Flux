@@ -2,11 +2,13 @@ package com.vicky7230.flux.ui.tvDetails
 
 import com.vicky7230.flux.data.Config
 import com.vicky7230.flux.data.DataManager
-import com.vicky7230.flux.data.network.addToWatchlist.AddToWatchlist
 import com.vicky7230.flux.ui.base.BasePresenter
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetProfile
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -63,6 +65,7 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
                                 mvpView?.hideLoading()
                                 if (setFavourite != null) {
                                     mvpView?.showMessage(setFavourite.statusMessage ?: "")
+                                    EventBus.getDefault().postSticky(LoginSuccessfulEventGetProfile())
                                 }
                             }, { throwable ->
                                 if (!isViewAttached())
@@ -94,6 +97,7 @@ class TvDetailsPresenter<V : TvDetailsMvpView> @Inject constructor(
                                 mvpView?.hideLoading()
                                 if (addToWatchlist != null) {
                                     mvpView?.showMessage(addToWatchlist.statusMessage ?: "")
+                                    EventBus.getDefault().postSticky(LoginSuccessfulEventGetWatchlist())
                                 }
                             }, { throwable ->
                                 if (!isViewAttached())

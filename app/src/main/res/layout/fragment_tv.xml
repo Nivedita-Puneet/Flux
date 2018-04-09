@@ -1,23 +1,65 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteBackground"
     tools:context="com.vicky7230.flux.ui.home.tv.TvFragment">
 
+    <FrameLayout
+        android:id="@+id/discover_genre_view"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/gray_shade_1"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/discover_genre_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:text="Animation" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/discover_genre_clear_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_close_white_24dp" />
+
+    </FrameLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/tvtList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/discover_genre_view"
         tools:listitem="@layout/tv_list_item" />
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_gravity="center"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:theme="@style/AppTheme.OrangeAccent"
         android:visibility="visible"
-        android:theme="@style/AppTheme.OrangeAccent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

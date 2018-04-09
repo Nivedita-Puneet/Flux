@@ -124,7 +124,8 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK) {
-                EventBus.getDefault().postSticky(LoginSuccessfulEvent())
+                EventBus.getDefault().postSticky(LoginSuccessfulEventGetWatchlist())
+                EventBus.getDefault().postSticky(LoginSuccessfulEventGetProfile())
             }
         }
     }
@@ -142,6 +143,10 @@ class HomeActivity : BaseActivity(), HomeMvpView, HasSupportFragmentInjector {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun goToTvFragment() {
+        bottomNavigationView.selectedItemId = R.id.tv
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

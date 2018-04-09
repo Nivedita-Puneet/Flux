@@ -44,6 +44,16 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
             10752 to R.drawable.war
     )*/
 
+    interface Callback {
+        fun onGenreClick(genre: Genre)
+    }
+
+    private var callback: Callback? = null
+
+    fun setCallback(callback: Callback) {
+        this.callback = callback
+    }
+
     fun addItems(genres: MutableList<Genre>?) {
         if (genres != null) {
             this.genres?.addAll(genres)
@@ -71,9 +81,10 @@ class DiscoverAdapter(private val genres: MutableList<Genre>?) :
                 )
         )
 
-        genreViewHolder.itemView.setOnClickListener({
+        genreViewHolder.itemView.genre_card.setOnClickListener({
             val genre = getItem(genreViewHolder.adapterPosition)
             if (genre != null) {
+                callback?.onGenreClick(genre)
             }
         })
 

@@ -16,13 +16,14 @@ import com.vicky7230.flux.data.network.model.genres.Genre
 import com.vicky7230.flux.ui.base.BaseFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_discover.*
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class DiscoverFragment : BaseFragment(), DiscoverMvpView {
+class DiscoverFragment : BaseFragment(), DiscoverMvpView, DiscoverAdapter.Callback {
 
     @Inject
     lateinit var presenter: DiscoverMvpPresenter<DiscoverMvpView>
@@ -48,6 +49,7 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
         presenter.onAttach(this)
+        discoverAdapter.setCallback(this)
         return view
     }
 
@@ -65,6 +67,10 @@ class DiscoverFragment : BaseFragment(), DiscoverMvpView {
         progress.visibility = GONE
         genres_list.visibility = VISIBLE
         discoverAdapter.addItems(genres)
+    }
+
+    override fun onGenreClick(genre: Genre) {
+        EventBus.getDefault().postSticky(DiscoverGenreEvent(genre.id, genre.name))
     }
 
     override fun onDestroyView() {

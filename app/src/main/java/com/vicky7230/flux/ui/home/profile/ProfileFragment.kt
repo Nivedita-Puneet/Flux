@@ -11,7 +11,8 @@ import android.view.ViewGroup
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.ui.base.BaseFragment
-import com.vicky7230.flux.ui.home.LoginSuccessfulEvent
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetProfile
+import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.greenrobot.eventbus.EventBus
@@ -38,8 +39,8 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         presenter.onAttach(this)
@@ -57,9 +58,13 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    fun onLoginSuccessfulEvent(event: LoginSuccessfulEvent) {
-        showMessage("Got Event.")
-        presenter.getAccountDetails()
+    fun onLoginSuccessfulEvent(eventGetProfile: LoginSuccessfulEventGetProfile) {
+        val loginSuccessfulEventGetProfile = EventBus.getDefault().getStickyEvent(LoginSuccessfulEventGetProfile::class.java)
+        if (loginSuccessfulEventGetProfile != null) {
+            showMessage("Got Profile Event.")
+            EventBus.getDefault().removeStickyEvent(loginSuccessfulEventGetProfile)
+            presenter.getAccountDetails()
+        }
     }
 
     override fun onStart() {

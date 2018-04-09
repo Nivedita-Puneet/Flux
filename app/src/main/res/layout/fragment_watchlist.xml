@@ -6,9 +6,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/watch_list"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:listitem="@layout/tv_list_item" />
 
     <ProgressBar
@@ -16,7 +16,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:visibility="visible"
-        android:theme="@style/AppTheme.OrangeAccent" />
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:theme="@style/AppTheme.OrangeAccent"
+        android:visibility="visible" />
 
 </FrameLayout>
