@@ -4,12 +4,17 @@ package com.vicky7230.flux.ui.home.profile
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.account.Account
+import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.base.BaseFragment
 import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetProfile
 import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
@@ -28,6 +33,12 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
 
     @Inject
     lateinit var presenter: ProfileMvpPresenter<ProfileMvpView>
+    @Inject
+    lateinit var linearLayoutManager: LinearLayoutManager
+    @Inject
+    lateinit var favouriteAdapter: FavouriteAdapter
+
+    var isLoading = false
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -49,12 +60,48 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
 
     override fun setUp(view: View) {
         presenter.getAccountDetails()
+
+        favourite_list.layoutManager = linearLayoutManager
+        favourite_list.addItemDecoration(DividerItemDecoration(this.activity, DividerItemDecoration.VERTICAL))
+        favourite_list.adapter = favouriteAdapter
+
+        favourite_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = linearLayoutManager.childCount
+                val totalItemCount = linearLayoutManager.itemCount
+                val pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition()
+
+                if (visibleItemCount + pastVisibleItems >= totalItemCount && !isLoading) {
+                    favouriteAdapter.addItem(
+                            Result(
+                                    type = "LOADING"
+                            )
+                    )
+                    presenter.getFavourites()
+                    isLoading = true
+                }
+            }
+        })
+
+        presenter.getFavourites()
     }
 
     override fun showAccountDetails(account: Account) {
-        profile_progress_bar.visibility = GONE
+        //profile_progress_bar.visibility = GONE
         name.text = account.name
         user_name.text = account.username
+    }
+
+    override fun showFavourites(results: MutableList<Result>) {
+        profile_progress_bar.visibility = GONE
+        favourite_list.visibility = VISIBLE
+        if (favouriteAdapter.itemCount > 0)
+            favouriteAdapter.removeItem()
+        if (results.size > 0) {
+            favouriteAdapter.addItems(results)
+            isLoading = false
+        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

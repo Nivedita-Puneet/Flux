@@ -24,13 +24,7 @@ interface ApiHelper {
 
     fun getGenresMovies(apiKey: String): Observable<Genres>
 
-    fun getTvByGenres(
-            apiKey: String,
-            withGenres: String,
-            page: String,
-            sortBy: String,
-            voteAverage: String
-    ): Observable<Results>
+    fun getTvByGenres(apiKey: String, withGenres: String, page: String, sortBy: String, voteAverage: String): Observable<Results>
 
     fun requestAuthenticationToken(apiKey: String): Observable<AuthenticationToken>
 
@@ -43,6 +37,8 @@ interface ApiHelper {
     fun getSearchResults(apiKey: String, query: String, page: String): Observable<Results>
 
     fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite>
+
+    fun getFavourites(accountId: Int, apiKey: String, sessionId: String, page: String): Observable<Results>
 
     fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist>
 

@@ -31,13 +31,7 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
         return apiService.getGenresMovies(apiKey)
     }
 
-    override fun getTvByGenres(
-            apiKey: String,
-            withGenres: String,
-            page: String,
-            sortBy: String,
-            voteAverage: String
-    ): Observable<Results> {
+    override fun getTvByGenres(apiKey: String, withGenres: String, page: String, sortBy: String, voteAverage: String): Observable<Results> {
         return apiService.getTvByGenres(apiKey, withGenres, page, sortBy, voteAverage)
     }
 
@@ -63,6 +57,10 @@ class AppApiHelper @Inject constructor(private val apiService: ApiService) : Api
 
     override fun setFavourite(accountId: Int, apiKey: String, sessionId: String, favourite: Favourite): Observable<SetFavourite> {
         return apiService.setFavourite(accountId, apiKey, sessionId, favourite)
+    }
+
+    override fun getFavourites(accountId: Int, apiKey: String, sessionId: String, page: String): Observable<Results> {
+        return apiService.getFavourites(accountId, apiKey, sessionId, page)
     }
 
     override fun addToWatchlist(accountId: Int, apiKey: String, sessionId: String, watchlist: Watchlist): Observable<AddToWatchlist> {

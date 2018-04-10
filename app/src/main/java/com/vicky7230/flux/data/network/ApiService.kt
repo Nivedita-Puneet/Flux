@@ -83,6 +83,14 @@ interface ApiService {
             @Body favourite: Favourite
     ): Observable<SetFavourite>
 
+    @GET("account/{account_id}/favorite/tv")
+    fun getFavourites(
+            @Path("account_id") accountId: Int,
+            @Query("api_key") apiKey: String,
+            @Query("session_id") sessionId: String,
+            @Query("page") page: String
+    ): Observable<Results>
+
     @POST("account/{account_id}/watchlist")
     fun addToWatchlist(
             @Path("account_id") accountId: Int,
