@@ -19,6 +19,10 @@ class ProfilePresenter<V : ProfileMvpView> @Inject constructor(
 
     var page = 1
 
+    override fun resetPageVariable() {
+        page = 1
+    }
+
     override fun getAccountDetails() {
         if (dataManager.getIsUserLoggedIn()) {
             compositeDisposable.add(

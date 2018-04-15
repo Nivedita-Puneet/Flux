@@ -8,4 +8,5 @@ import com.vicky7230.flux.ui.base.MvpPresenter
 interface ProfileMvpPresenter<V : ProfileMvpView> : MvpPresenter<V> {
     fun getAccountDetails()
     fun getFavourites()
+    fun resetPageVariable()
 }

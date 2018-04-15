@@ -17,7 +17,6 @@ import com.vicky7230.flux.data.network.model.account.Account
 import com.vicky7230.flux.data.network.model.results.Result
 import com.vicky7230.flux.ui.base.BaseFragment
 import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetProfile
-import com.vicky7230.flux.ui.home.LoginSuccessfulEventGetWatchlist
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.greenrobot.eventbus.EventBus
@@ -88,7 +87,8 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
     }
 
     override fun showAccountDetails(account: Account) {
-        //profile_progress_bar.visibility = GONE
+        profile_progress_bar.visibility = GONE
+        favourite_list.visibility = VISIBLE
         name.text = account.name
         user_name.text = account.username
     }
@@ -110,7 +110,12 @@ class ProfileFragment : BaseFragment(), ProfileMvpView {
         if (loginSuccessfulEventGetProfile != null) {
             showMessage("Got Profile Event.")
             EventBus.getDefault().removeStickyEvent(loginSuccessfulEventGetProfile)
+            profile_progress_bar.visibility = VISIBLE
+            favourite_list.visibility = GONE
+            favouriteAdapter.clearItems()
+            presenter.resetPageVariable()
             presenter.getAccountDetails()
+            presenter.getFavourites()
         }
     }
 
