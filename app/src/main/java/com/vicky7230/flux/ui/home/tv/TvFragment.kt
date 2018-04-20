@@ -172,7 +172,7 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
                 android.R.layout.simple_spinner_item,
                 sortByList
         )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(R.layout.sort_by_spinner_item)
         sortBySpinner.adapter = adapter
         sortBySpinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(

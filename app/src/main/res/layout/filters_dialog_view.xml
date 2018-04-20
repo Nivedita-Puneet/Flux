@@ -26,18 +26,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="24dp"
-            android:text="Sort by" />
+            android:text="Sort by"
+            android:textSize="16sp" />
 
         <View
-            android:layout_width="60dp"
+            android:layout_width="30dp"
             android:layout_height="0dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/sort_by_spinner"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="3" />
+            android:layout_marginRight="10dp" />
 
     </LinearLayout>
 
@@ -49,20 +49,20 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:paddingLeft="24dp"
-            android:text="Rating > " />
+            android:text="Rating > "
+            android:textSize="16sp" />
 
         <View
-            android:layout_width="60dp"
+            android:layout_width="30dp"
             android:layout_height="0dp" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/rating_circle"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="3" />
+            android:layout_marginRight="10dp" />
 
     </LinearLayout>
 

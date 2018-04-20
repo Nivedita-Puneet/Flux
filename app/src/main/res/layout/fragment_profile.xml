@@ -49,8 +49,6 @@
                 tools:text="vicky7230" />
         </LinearLayout>
 
-
-
     </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
