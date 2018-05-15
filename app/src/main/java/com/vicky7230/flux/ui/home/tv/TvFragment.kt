@@ -3,6 +3,7 @@ package com.vicky7230.flux.ui.home.tv
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
@@ -15,6 +16,7 @@ import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.PopupWindow
 import com.jakewharton.rxbinding2.view.RxView
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
@@ -64,6 +66,8 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
     private val rating = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
     private var dialog: Dialog? = null
+
+    private var popupWindow: PopupWindow? = null
 
     companion object {
         fun newInstance() = TvFragment()
@@ -148,7 +152,6 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
                 }
             }
         })
-
         RxView.clicks(discover_genre_clear_button).subscribe({
             discover_genre_view.visibility = GONE
             discoverGenreId = null
@@ -214,6 +217,11 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
 
             }
         }
+
+        val layoutInflater = this.activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val fabsView = layoutInflater.inflate(R.layout.fabs_popup, null)
+        popupWindow = PopupWindow(fabsView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
     }
 
     override fun updateTvList(results: MutableList<Result>) {
@@ -229,6 +237,17 @@ class TvFragment : BaseFragment(), TvMvpView, TvAdapter.Callback {
 
     override fun onTvShowClick(id: Int) {
         startActivity(TvDetailsActivity.getStartIntent(activity as Context, id.toString()))
+    }
+
+    override fun onTvShowLongClick(viewGroup: ViewGroup, x: Int, y: Int) {
+        popupWindow?.dismiss()
+        popupWindow?.showAtLocation(root, Gravity.NO_GRAVITY, x, y - context?.resources?.getDimensionPixelOffset(R.dimen.popUpWindowHeight)!!)
+        scrim.visibility = VISIBLE
+    }
+
+    override fun hidePopUpWindow() {
+        popupWindow?.dismiss()
+        scrim.visibility = GONE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

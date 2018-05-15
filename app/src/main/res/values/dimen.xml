@@ -6,4 +6,5 @@
     <dimen name="chipMarginBig">9dp</dimen>
     <dimen name="tvImageOffset">10dp</dimen>
     <dimen name="genreImageOffset">7dp</dimen>
+    <dimen name="popUpWindowHeight">98dp</dimen>
 </resources>

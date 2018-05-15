@@ -7,7 +7,7 @@
     tools:context="com.vicky7230.flux.ui.home.discover.DiscoverFragment">
 
     <LinearLayout
-        android:id="@+id/background_pic"
+        android:id="@+id/profile_area"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="@android:color/white"
@@ -59,9 +59,30 @@
         android:background="@drawable/curved_orange"
         android:text="LOGOUT"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/background_pic"
+        app:layout_constraintBottom_toBottomOf="@id/profile_area"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/favourite_label"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="Your Favourite Tv Shows "
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_area" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favourite_label"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/favourite_list"
@@ -71,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/background_pic" />
+        app:layout_constraintTop_toBottomOf="@id/favourite_label" />
 
     <ProgressBar
         android:id="@+id/profile_progress_bar"

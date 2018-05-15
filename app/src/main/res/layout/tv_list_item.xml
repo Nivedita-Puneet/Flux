@@ -9,9 +9,9 @@
         android:id="@+id/tv_image_card"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        android:background="@color/divider"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/divider"
         android:foreground="?attr/selectableItemBackground">
 
         <android.support.v7.widget.AppCompatImageView

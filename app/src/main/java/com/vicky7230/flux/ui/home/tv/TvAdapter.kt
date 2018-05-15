@@ -3,8 +3,10 @@ package com.vicky7230.flux.ui.home.tv
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.vicky7230.flux.R
 import com.vicky7230.flux.data.network.model.results.Result
@@ -23,8 +25,14 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
     private val TYPE_LOADING = -1
     private val TYPE_RESULT = 1
 
+    var x = 0
+    var y = 0
+    var isLongPressed = false
+
     interface Callback {
         fun onTvShowClick(id: Int)
+        fun onTvShowLongClick(viewGroup: ViewGroup, x: Int, y: Int)
+        fun hidePopUpWindow()
     }
 
     private var callback: Callback? = null
@@ -85,6 +93,28 @@ class TvAdapter(private val resultList: MutableList<Result>?) :
                         false
                 )
         )
+
+        /*resultViewHolder.itemView.tv_image_card.setOnLongClickListener({ it ->
+            isLongPressed = true
+            callback?.onTvShowLongClick(it as ViewGroup, x, y)
+            true
+        })
+
+        resultViewHolder.itemView.tv_image_card.setOnTouchListener({ v: View?, event: MotionEvent? ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x = event.rawX.toInt()
+                    y = event.rawY.toInt()
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (isLongPressed) {
+                        callback?.hidePopUpWindow()
+                        isLongPressed = false
+                    }
+                }
+            }
+            false
+        })*/
 
         resultViewHolder.itemView.tv_image_card.setOnClickListener({
             val result = getItem(resultViewHolder.adapterPosition)
