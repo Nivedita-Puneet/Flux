@@ -3,17 +3,24 @@
 # Flux
 ![License](https://img.shields.io/badge/LICENSE-Apache%20License%202.0-blue.svg)
  
-### An app to find TV series to watxch  
+### An app to find TV series to watch, written in kotlin.
 ![KOTLIN LOGO](https://github.com/vicky7230/Cucumber/blob/master/graphics/kotLogo.png "Flux is written in kotlin")
 
 
 ### This repository implements MVP architecture using Kotlin, Dagger2, RxJava2, Room and Retrofit2. 
 
 <p align="center">
-  <img src="https://github.com/vicky7230/Cucumber/blob/master/graphics/1.png" width="280">
-  <img src="https://github.com/vicky7230/Cucumber/blob/master/graphics/2.png" width="280">
-  <img src="https://github.com/vicky7230/Cucumber/blob/master/graphics/3.png" width="280">
+  <img src="https://github.com/vicky7230/Flux/blob/master/graphics/1.png" width="280">
+  <img src="https://github.com/vicky7230/Flux/blob/master/graphics/2.png" width="280">
+  <img src="https://github.com/vicky7230/Flux/blob/master/graphics/3.png" width="280">
 </p>
+
+### Features :
+1. Search TV series
+2. Get TV details like plot, seasons, cast and reviews
+3. Add TV series to your watchlist
+4. Watch trailers
+5. Add TV series to your favourites
 
 # Architecture Blueprint
 ![Blueprint](https://janishar.github.io/images/mvp-app-pics/mvp-arch.png)
